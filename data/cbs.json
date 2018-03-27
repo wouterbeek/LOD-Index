@@ -1,0 +1,16 @@
+{
+  "@context": "https://sitemap.lodlaundromat.org/",
+  "set": {
+    "wijk-en-buurt-kaart": {
+      "rdfs:label": "Wijk- en Buurt kaart",
+      "void:dataDump": [
+        "https://krr.triply.cc/Kadaster/cbs/download.trig.gz"
+      ]
+    },
+    "energiepotentie": {
+      "void:dataDump": [
+        "https://krr.triply.cc/Kadaster/energiepotentie/download.trig.gz"
+      ]
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "@context": "https://sitemap.lodlaundromat.org/",
+  "set": {
+    "sameas": {
+      "rdfs:label": "owl:sameAs",
+      "void:dataDump": [
+        "https://krr.triply.cc/wouter/sameAs/download.trig.gz"
+      ]
+    },
+    "sameas-schema": {
+      "rdfs:label": "owl:sameAs schema",
+      "void:dataDump": [
+        "https://krr.triply.cc/wouter/sameAs-schema/download.trig.gz"
+      ]
+    }
+  }
+}

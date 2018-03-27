@@ -1,0 +1,15 @@
+{
+  "@context": "https://sitemap.lodlaundromat.org/",
+  "set": {
+    "beeldbank": {
+      "void:dataDump": [
+        "https://krr.triply.cc/Kadaster/beeldbank/download.trig.gz"
+      ]
+    },
+    "monumenten": {
+      "void:dataDump": [
+        "https://krr.triply.cc/Kadaster/monumenten/download.trig.gz"
+      ]
+    }
+  }
+}
