@@ -8,6 +8,7 @@
 /** <module> LOD-Index tools for HTML
 */
 
+:- use_module(library(lists)).
 :- use_module(library(nb_set)).
 :- use_module(library(sgml)).
 
