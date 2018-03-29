@@ -1,0 +1,19 @@
+{
+  "data-directory": "/home/wbeek/data/seeder/",
+  "seedlist": {
+    "_authority": "localhost:4004",
+    "authority": "lod.labs.vu.nl:4004",
+    "password": "aap",
+    "scheme": "http",
+    "user": "wouter"
+  },
+  "tapir": {
+    "sites": {
+      "ll": {
+        "host": "api.data.lodlaundromat.org",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJ1bmtub3duIiwiaXNzIjoidHJpcGx5LmNjIiwianRpIjoiYzE5MTgwYjctZmNjOS00Yjk1LTg4NmEtZGRlYzM5MmI2NjdkIiwic2MiOnsiZHMiOlsiYSJdLCJ1cyI6WyJhIl0sImFjYyI6WyJhIl19LCJ1aWQiOiI1YWFmYzRiM2Y0ZjgyNzAyNjM3OGQ3ZWIiLCJpYXQiOjE1MjE0ODAxMDR9.hL5BvwKlaCe1ErC2t3pJVpKY-HVrFWvr1HPHe9V5iyE",
+        "user": "wouter"
+      }
+    }
+  }
+}
