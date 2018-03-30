@@ -1,0 +1,196 @@
+prefix dcat: <http://www.w3.org/ns/dcat#>
+prefix dct: <http://purl.org/dc/terms/>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix void: <http://rdfs.org/ns/void#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+
+prefix data: <https://index.lodlaundromat.org/dataset/>
+prefix dist: <https://index.lodlaundromat.org/distribution/>
+prefix graph: <https://data.lodlaundromat.org/wouter/index/graphs/>
+prefix org: <https://index.lodlaundromat.org/organization/>
+prefix topic: <https://index.lodlaundromat.org/topic/>
+
+
+# catalogs
+
+<https://index.triply.cc> a dcat:Catalog ;
+  dcat:dataset
+    data:beeldbank ,
+    data:energiebesparingspotentie ,
+    data:lov ,
+    data:monumenten ,
+    data:sameas ,
+    data:sameas-schema ,
+    data:wijk-en-buurt-kaart .
+
+
+
+# datasets
+
+data:beeldbank a dcat:Dataset ;
+  dcat:distribution dist:beeldbank ;
+  dcat:theme
+    topic:history ,
+    topic:netherlands ,
+    topic:photography ;
+  dct:publisher org:rce ;
+  rdfs:label "Beeldbank"@nl .
+
+data:energiebesparingspotentie a dcat:Dataset ;
+  dcat:distribution dist:energiebesparingspotentie ;
+  dcat:theme
+    topic:energy ,
+    topic:geography ,
+    topic:statistics ;
+  dct:publisher org:cbs ;
+  rdfs:label "Energiebesparingspotentie"@nl .
+
+data:lov a dcat:Dataset ;
+  dcat:distribution
+    dist:lov-n3 ,
+    dist:lov-nq ;
+  dcat:theme topic:semantics ;
+  dct:description "LOV stands for Linked Open Vocabularies. This name is derived from LOD, standing for Linked Open Data. A vocabulary in LOV gathers definitions of a set of classes and properties (together simply called terms of the vocabulary), useful to describe specific types of things, or things in a given domain or industry, or things at large but for a specific usage. Terms of vocabularies also provide the links in linked data, in the above case between a Person and a City. The definitions of terms provided by the vocabularies bring clear semantics to descriptions and links, thanks to the formal language they use (some dialect of RDF such as RDFS or OWL). In short, vocabularies provide the semantic glue enabling Data to become meaningful Data."@en ;
+  dct:publisher org:okfn ;
+  rdfs:label "Linked Open Vocabularies (LOV)"@en .
+
+data:monumenten a dcat:Dataset ;
+  dcat:distribution dist:monumenten ;
+  dcat:theme
+    topic:history ,
+    topic:netherlands ;
+  dct:publisher org:rce ;
+  rdfs:label "Monumenten"@nl .
+
+data:sameas a dcat:Dataset ;
+  dcat:distribution dist:sameas ;
+  dcat:theme topic:owl ;
+  dct:publischer org:krr ;
+  rdfs:label "owl:sameAs"@en .
+
+data:sameas-schema a dcat:Dataset ;
+  dcat:distribution dist:sameas-schema ;
+  dcat:theme topic:owl ;
+  dct:publischer org:krr ;
+  rdfs:label "owl:sameAs schema"@en .
+
+data:wijk-en-buurt-kaart a dcat:Dataset ;
+  dcat:distribution dist:wijk-en-buurt-kaart ;
+  dcat:theme
+    topic:geography ,
+    topic:netherlands ,
+    topic:statistics ;
+  dct:publisher org:cbs ;
+  rdfs:label "Wijk- en Buurt kaart"@nl .
+
+
+
+# distributions
+
+dist:beeldbank a dcat:Distribution ;
+  dcat:downloadURL "https://krr.triply.cc/Kadaster/beeldbank/download.trig.gz"^^xsd:anyURI ;
+  dcat:mediaType "application/trig" .
+
+dist:energiebesparingspotentie a dcat:Distribution ;
+  dcat:downloadURL "https://krr.triply.cc/Kadaster/energiepotentie/download.trig.gz"^^xsd:anyURI ;
+  dcat:mediaType "application/trig" .
+
+dist:lov-n3 a dcat:Distribution ;
+  dcat:downloadURL "http://lov.okfn.org/lov.n3.gz"^^xsd:anyURI ;
+  dcat:mediaType "text/n3" .
+
+dist:lov-nq a dcat:Distribution ;
+  dcat:downloadURL "http://lov.okfn.org/lov.nq.gz"^^xsd:anyURI ;
+  dcat:mediaType "application/n-quads" .
+
+dist:monumenten a dcat:Distribution ;
+  dcat:downloadURL "https://krr.triply.cc/Kadaster/monumenten/download.trig.gz"^^xsd:anyURI ;
+  dcat:mediaType "application/trig" .
+
+dist:sameas a dcat:Distribution ;
+  dcat:downloadURL "https://krr.triply.cc/wouter/sameAs/download.trig.gz"^^xsd:anyURI ;
+  dcat:mediaType "application/trig" .
+
+dist:sameas-schema a dcat:Distribution ;
+  dcat:downloadURL "https://krr.triply.cc/wouter/sameAs-schema/download.trig.gz"^^xsd:anyURI ;
+  dcat:mediaType "application/trig" .
+
+dist:wijk-en-buurt-kaart a dcat:Distribution ;
+  dcat:downloadURL "https://krr.triply.cc/Kadaster/cbs/download.trig.gz"^^xsd:anyURI ;
+  dcat:mediaType "application/trig" .
+
+
+
+# organizations
+
+org:bio2rdf a foaf:Organization ;
+  foaf:homepage "http://bio2rdf.org"^^xsd:anyURI ;
+  rdfs:label "BIO2RDF"@en .
+
+org:cbs a foaf:Organization ;
+  foaf:homepage "https://www.cbs.nl"^^xsd:anyURi ;
+  rdfs:label "Centraal Bureau voor de Statistiek (CBS)"@nl .
+
+org:dbpedia a foaf:Organization ;
+  foaf:homepage "http://dbpedia.org"^^xsd:anyURI ;
+  rdfs:label "DBpedia"@en .
+
+org:okfn a foaf:Organization ;
+  foaf:homepage "https://okfn.org"^^xsd:anyURI ;
+  rdfs:label "Open Knowledge Foundation (OKFN)"@en .
+
+org:kadaster a foaf:Organization ;
+  foaf:homepage "https://data.pdok.nl"^^xsd:anyURI ;
+  rdfs:label "Kadaster"@nl .
+
+org:krr a foaf:Organization ;
+  foaf:homepage "https://krr.cs.vu.nl/"^^xsd:anyURI ;
+  rdfs:label "Knowledge Representation and Reasoning (KR&R)"@en .
+
+org:rce a foaf:Organization ;
+  foaf:homepage "https://cultureelerfgoed.nl"^^xsd:anyURI ;
+  rdfs:label "Rijksdienst voor het Cultureel Erfgoed (RCE)"@nl .
+
+org:triply a foaf:Organization ;
+  foaf:homepage "https://triply.cc"^^xsd:anyURI ;
+  rdfs:label
+    "Triply"@en ,
+    "Triply"@nl .
+
+
+
+# topics
+
+topic:art a skos:Concept ;
+  rdfs:label "Art"@en ;
+  skos:inScheme topic: .
+
+topic:geography a skos:Concept ;
+  rdfs:label "Geo"@en ;
+  skos:inScheme topic: .
+
+topic:history a skos:Concept ;
+  rdfs:label "History"@en ;
+  skos:inScheme topic: .
+
+topic:location a skos:Concept ;
+  rdfs:label "Location"@en ;
+  skos:inScheme topic: .
+
+topic:netherlands a skos:Concept ;
+  rdfs:label "Netherlands"@en ;
+  skos:inScheme topic: .
+
+topic:owl a skos:Concept ;
+  rdfs:label "Web Ontology Language (OWL)"@en ;
+  skos:inScheme topic: .
+
+topic:photography a skos:Concept ;
+  rdfs:label "Photography"@en ;
+  skos:inScheme topic: .
+
+topic:semantics a skos:Concept ;
+  rdfs:label "Semantics"@en ;
+  skos:inScheme topic: .
