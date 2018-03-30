@@ -45,20 +45,8 @@
 :- use_module(library(http/http_client2)).
 :- use_module(library(uri_ext)).
 
-:- initialization
-   init_seeder.
-
 :- meta_predicate
     seedlist_request_(+, +, 1, +).
-
-:- setting(authority, any, _,
-           "URI scheme of the seedlist server location.").
-:- setting(data_directory, any, _,
-           "The directory where seeder reports are stored.").
-:- setting(password, any, _, "").
-:- setting(scheme, oneof([http,https]), https,
-           "URI scheme of the seedlist server location.").
-:- setting(user, any, _, "").
 
 
 
@@ -163,48 +151,4 @@ seed_(Seed, In) :-
       (is_list(Seeds) -> member(Seed, Seeds) ; Seed = Seeds)
     ),
     close(In)
-  ).
-
-
-
-%! seedlist_request_(+Segments:list(atom), ?Query:list(compound), :Goal_1,
-%!                   +Options:list(compound)) is semidet.
-
-seedlist_request_(Segments, Query, Goal_1, Options) :-
-  maplist(
-    setting,
-    [authority,password,scheme,user],
-    [Auth,Password,Scheme,User]
-  ),
-  uri_comps(Uri, uri(Scheme,Auth,Segments,Query,_)),
-  http_call(
-    Uri,
-    Goal_1,
-    [accept(json),authorization(basic(User,Password))|Options]
-  ).
-
-
-
-
-
-% INITIALIZATION %
-
-%! init_seeder is det.
-
-init_seeder :-
-  conf_json(Conf),
-  % data directory
-  create_directory(Conf.'data-directory'),
-  set_setting(data_directory, Conf.'data-directory'),
-  % seedlist
-  _{
-    authority: Auth,
-    password: Password,
-    scheme: Scheme,
-    user: User
-  } :< Conf.seedlist,
-  maplist(
-    set_setting,
-    [authority,password,scheme,user],
-    [Auth,Password,Scheme,User]
   ).
