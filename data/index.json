@@ -3,31 +3,31 @@
   "index": {
     "bio2rdf": {
       "foaf:homepage": "http://bio2rdf.org",
-      "loc": "bio2rdf.json",
+      "loc": "data/bio2rdf.json",
       "rdfs:label": "BIO2RDF"
     },
     "dbpedia": {
       "foaf:homepage": "http://dbpedia.org",
-      "loc": "dbpedia.json",
+      "loc": "data/dbpedia.json",
       "rdfs:label": "DBpedia"
     },
     "okfn": {
       "foaf:homepage": "https://okfn.org",
-      "loc": "okfn.json",
+      "loc": "data/okfn.json",
       "rdfs:label": "Open Knowledge Foundation (OKFN)"
     },
     "kadaster": {
-      "foaf:homepage": "https://data.pdok.nl"
-      "loc": "kadaster.json",
+      "foaf:homepage": "https://data.pdok.nl",
+      "loc": "data/kadaster.json",
       "rdfs:label": "Kadaster",
     },
     "rce": {
       "foaf:homepage": "https://cultureelerfgoed.nl",
-      "loc": "rce.json",
+      "loc": "data/rce.json",
       "rdfs:label": "Rijksdienst voor het Cultureel Erfgoed (RCE)"
     },
     "unkown": {
       "loc": "unknown.json"
     }
-  ]
+  }
 }
