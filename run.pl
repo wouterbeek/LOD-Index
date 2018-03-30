@@ -50,5 +50,5 @@ dbpedia_version_('2016-10').
 
 
 upload_sitemap :-
-  absolute_file_name('data/index.json', File),
+  absolute_file_name(data/'index.json', File),
   process_index(File).
