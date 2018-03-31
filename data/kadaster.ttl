@@ -1,0 +1,72 @@
+prefix dcat: <http://www.w3.org/ns/dcat#>
+prefix dct: <http://purl.org/dc/terms/>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+prefix void: <http://rdfs.org/ns/void#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+
+prefix data: <https://index.lodlaundromat.org/dataset/>
+prefix dist: <https://index.lodlaundromat.org/distribution/>
+prefix org: <https://index.lodlaundromat.org/organization/>
+prefix topic: <https://index.lodlaundromat.org/topic/>
+
+# Catalog
+
+<https://index.lodlaundromat.org> a dcat:Catalog ;
+  dcat:dataset
+    data:bag ,
+    data:brk ,
+    data:brt .
+
+
+
+# Datasets
+
+data:bag a dcat:Dataset ;
+  dcat:distribution dist:bag ;
+  dcat:theme
+    topic:geography ,
+    topic:netherlands ;
+  dct:publisher org:kadaster ;
+  rdfs:label "Basisregistratie Gebouwen (BAG)"@nl .
+
+data:brk a dcat:Dataset ;
+  dcat:distribution dist:brk ;
+  dcat:theme
+    topic:geography ,
+    topic:netherlands ;
+  dct:publisher org:kadaster ;
+  rdfs:label "Basisregistratie Kadaster (BRK)"@nl .
+
+data:brt a dcat:Dataset ;
+  dcat:distribution dist:brt ;
+  dcat:theme
+    topic:geography ,
+    topic:netherlands ;
+  dct:publisher org:kadaster ;
+  rdfs:label "Basisregistratie Topografie (BRT)"@nl .
+
+
+
+# Distributions
+
+dist:bag a dcat:Distribution ;
+  dcat:downloadURL "https://krr.triply.cc/Kadaster/BAG/download.trig.gz"^^xsd:anyURI ;
+  dcat:mediaType "application/trig" .
+
+dist:brk a dcat:Distribution ;
+  dcat:downloadURL "https://krr.triply.cc/Kadaster/BRK/download.trig.gz"^^xsd:anyURI ;
+  dcat:mediaType "application/trig" .
+
+dist:brt a dcat:Distribution ;
+  dcat:downloadURL "https://krr.triply.cc/Kadaster/BRT/download.trig.gz"^^xsd:anyURI ;
+  dcat:mediaType "application/trig" .
+
+
+
+# Organizations
+
+org:kadaster a foaf:Organization ;
+  foaf:homepage "https://data.pdok.nl"^^xsd:anyURI ;
+  rdfs:label "Kadaster"@nl .

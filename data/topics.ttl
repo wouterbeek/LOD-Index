@@ -1,0 +1,40 @@
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix skos: <http://www.w3.org/2004/02/skos/core#>
+
+prefix topic: <https://index.lodlaundromat.org/topic/>
+
+topic:art a skos:Concept ;
+  rdfs:label "Art"@en ;
+  skos:inScheme topic: .
+
+topic:biomediacal a skos:Concept ;
+  rdfs:label "Bio-medical"@en ;
+  skos:inScheme topic: .
+
+topic:geography a skos:Concept ;
+  rdfs:label "Geo"@en ;
+  skos:inScheme topic: .
+
+topic:history a skos:Concept ;
+  rdfs:label "History"@en ;
+  skos:inScheme topic: .
+
+topic:location a skos:Concept ;
+  rdfs:label "Location"@en ;
+  skos:inScheme topic: .
+
+topic:netherlands a skos:Concept ;
+  rdfs:label "Netherlands"@en ;
+  skos:inScheme topic: .
+
+topic:owl a skos:Concept ;
+  rdfs:label "Web Ontology Language (OWL)"@en ;
+  skos:inScheme topic: .
+
+topic:photography a skos:Concept ;
+  rdfs:label "Photography"@en ;
+  skos:inScheme topic: .
+
+topic:semantics a skos:Concept ;
+  rdfs:label "Semantics"@en ;
+  skos:inScheme topic: .
