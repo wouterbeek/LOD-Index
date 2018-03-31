@@ -1,2 +1,2 @@
 #!/bin/bash
-swipl -q upload_index.pl --conf=conf.json
+swipl -q script/upload_index.pl --conf=conf.json

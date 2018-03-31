@@ -1,0 +1,13 @@
+#+TITLE: LOD-Index
+#+AUTHOR: Wouter Beek
+
+* Upload the index.
+** Create index files in ~/data~.
+** Upload index files to ~data.lodlaundromat.org/wouter/index~
+* Populate the seedlist.
+** Query document URLs from ~data.lodlaundromat.org/wouter/index~
+** Upload query document URLs to LOD-Seedlist
+* Upload the dataset
+** Query datasets from ~data.lodlaundromat.org/wouter/index~
+** Check whether its document URLs have been cleaned in LOD-Seedlist
+** Upload the document URLs and metadata to ~data.lodlaundromat.org~

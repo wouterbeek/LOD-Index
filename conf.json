@@ -1,13 +1,14 @@
 {
   "data-directory": "/home/wbeek/data/seeder/",
   "seedlist": {
-    "_authority": "localhost:4004",
-    "authority": "lod.labs.vu.nl:4004",
+    "authority": "localhost:4004",
+    "_authority": "lod.labs.vu.nl:4004",
     "password": "aap",
     "scheme": "http",
     "user": "wouter"
   },
   "tapir": {
+    "client": "/home/wbeek/Triply/client.js/build/src/test.js",
     "sites": {
       "ll": {
         "host": "api.data.lodlaundromat.org",

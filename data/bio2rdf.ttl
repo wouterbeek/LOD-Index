@@ -8,7 +8,6 @@ prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 
 prefix data: <https://index.lodlaundromat.org/dataset/>
 prefix dist: <https://index.lodlaundromat.org/distribution/>
-prefix graph: <https://data.lodlaundromat.org/wouter/index/graphs/>
 prefix org: <https://index.lodlaundromat.org/organization/>
 prefix topic: <https://index.lodlaundromat.org/topic/>
 
