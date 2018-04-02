@@ -1,15 +1,3 @@
-%! end_seed(+Seed:dict) is det.
-
-end_seed(Seed) :-
-  seedlist_request_(
-    [seed,processing],
-    [hash(Seed.hash)],
-    close,
-    [failure(404),method(patch)]
-  ).
-
-
-
 %! seed_by_hash(+Hash:atom, -Seed:dict) is det.
 
 seed_by_hash(Hash, Seed) :-
@@ -31,17 +19,5 @@ reset_seed(Seed) :-
     [seed,idle],
     [hash(Seed.hash)],
     close,
-    [failure(404),method(patch)]
-  ).
-
-
-
-%! start_seed(-Seed:dict) is semidet.
-
-start_seed(Seed) :-
-  seedlist_request_(
-    [seed,stale],
-    [],
-    seed_(Seed),
     [failure(404),method(patch)]
   ).

@@ -42,38 +42,17 @@
 
 
 
-%! assert_seed(+Url:atom) is det.
-
-assert_seed(Uri) :-
-  catch(
-    seedlist_request_(
-      [seed],
-      [],
-      close,
-      [post(json(_{url: Uri})),success(201)]
-    ),
-    E,
-    true
-  ),
-  (   var(E)
-  ->  true
-  ;   E = error(http_status(200,_),_)
-  ->  print_message(informational, seed_already_exists)
-  ;   throw(E)
-  ).
-
-
-
 %! assertall_seeds is det.
 
 assertall_seeds :-
   forall(
-    statement(wouter, index, _, dcat:downloadURL, Uri0),
-    (
-      rdf_literal_value(Uri0, Uri),
-      assert_seed(Uri)
-    )
+    findnsols(1 000, Uri, url_(Uri), Uris),
+    seedlist_request_([seed], [], close, [post(json(_{urls: Uris}))])
   ).
+
+url_(Uri) :-
+  statement(wouter, index, _, dcat:downloadURL, Uri0),
+  rdf_literal_value(Uri0, Uri).
 
 
 
