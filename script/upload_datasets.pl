@@ -53,7 +53,7 @@ upload_dataset_(Dataset) :-
       rdf_triple(Dataset, dcat:distribution, Distribution),
       rdf_triple(Distribution, dcat:downloadURL, Uri0),
       rdf_literal_value(Uri0, Uri),
-      md5_hash(Uri, Hash),
+      md5(Uri, Hash),
       directory_file_path(Dir0, Hash, Dir),
       directory_file_path(Dir, 'clean.nq.gz', File)
     ),

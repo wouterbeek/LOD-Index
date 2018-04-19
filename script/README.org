@@ -1,0 +1,22 @@
+#+TITLE: LOD-Index scripts
+#+AUTHOR: Wouter Beek
+
+This directory contains scripts for updating and using the online LOD
+Index.
+
+* Upload the index.
+Script ~upload-index.sh~ collects the data description files from
+~/data~ and uploads them to
+https://data.lodlaundromat.org/wouter/index.
+
+* Populate the seedlist.
+Script ~upload-seeds.sh~ queries for document URLs from
+https://data.lodlaundromat.org/wouter/index, and adds them to the
+LOD-Seedlist service.
+
+* Upload the dataset
+Script ~upload-datasets.sh~ queries for datasets from
+https://data.lodlaundromat.org/wouter/index and checks whether their
+corresponding documents have already been cleaned by the
+LOD-Laundromat.  If so, the dataset is uploaded to
+https://data.lodlaundromat.org.

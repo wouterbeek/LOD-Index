@@ -1,0 +1,56 @@
+prefix dcat: <http://www.w3.org/ns/dcat#>
+prefix dcterm: <http://purl.org/dc/terms/>
+prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+
+# Catalog
+
+<https://index.lodlaundromat.org> a dcat:Catalog ;
+  dcat:dataset
+    data:tcga .
+
+
+
+# Dataset
+
+data:tcga a dcat:Dataset ;
+  dcat:distribution dist:tcga ;
+  dcat:theme topic:biomedical ;
+  dcterm:publisher org:? ;
+  foaf:homepage "" ;
+  rdfs:label "TCGA"@en .
+
+
+
+# Distribution
+
+dist:tcga a dcat:Distribution ;
+  dcat:accessURL "http://tcga.deri.ie/dumps/"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/ACC.tar.bz"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/BLCA-N3.tar.bz"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/BRCA.tar.bz"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/CESC-N3.tar.bz"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/COAD.rar"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/DLBC.tar.bz"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/ESCA.tar.bz"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/GBM.tar.bz"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/HNSC-N3.tar.bz"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/KICH.tar.bz"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/KIRC.tar.bz"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/KIRP-N3.tar.bz"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/LAML-N3.tar.bz"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/LGG-N3.tar.bz"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/LIHC.tar.bz"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/LUAD.tar.bz"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/LUSC-N3.tar.bz"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/OV.tar.bz"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/PAAD.tar.bz"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/PRAD.tar.bz"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/READ-N3.tar.bz"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/SARC.tar.bz"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/SKCM-N3.tar.bz"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/STAD.tar.bz"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/THCA.rar"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/UCEC.rar"^^xsd:anyURI ;
+  dcat:downloadURL "http://tcga.deri.ie/dumps/UCS.tar.bz"^^xsd:anyURI .

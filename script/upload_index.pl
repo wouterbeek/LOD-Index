@@ -6,11 +6,10 @@
 @version 2018
 */
 
-:- use_module(library(file_ext)).
 :- use_module(library(tapir)).
 
 run :-
-  findall(File, directory_path(data, File), Files),
+  expand_file_name('../data/*.ttl', Files),
   Prefixes = [
     data-'https://index.lodlaundromat.org/dataset/',
     dcat-'http://www.w3.org/ns/dcat#',
