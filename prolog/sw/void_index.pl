@@ -13,8 +13,8 @@
 
 :- use_module(library(apply)).
 
+:- use_module(library(http/tapir)).
 :- use_module(library(sw/rdf_prefix)).
-:- use_module(library(tapir)).
 
 :- maplist(rdf_assert_prefix, [
      dct-'http://purl.org/dc/terms/',

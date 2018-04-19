@@ -18,9 +18,9 @@
 
 :- use_module(library(conf_ext)).
 :- use_module(library(http/http_client2)).
+:- use_module(library(http/tapir)).
 :- use_module(library(sw/rdf_prefix)).
 :- use_module(library(sw/rdf_term)).
-:- use_module(library(tapir)).
 :- use_module(library(uri_ext)).
 
 :- initialization
