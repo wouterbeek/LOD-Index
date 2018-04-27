@@ -38,6 +38,6 @@ reset_seeds_by_status(Status) :-
     seed_by_type(Status, Seed),
     (
       retract_seed(Seed),
-      assert_seed(Seed)
+      assert_seed(Seed.url)
     )
   ).
