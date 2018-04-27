@@ -1,4 +1,10 @@
-:- module(reset_seeds, [clear_all/0,reset_processing/0]).
+:- module(
+  reset_seeds,
+  [
+    remove_seeds/0,
+    reset_seeds_by_status/1 % +Status
+  ]
+).
 
 /** <module> Reset seeds in LOD Seedlist
 
@@ -6,13 +12,17 @@
 @version 2018
 */
 
+:- use_module(library(error)).
+
 :- use_module(seedlist_client).
 
 
 
 
 
-clear_all :-
+%! remove_seeds is det.
+
+remove_seeds :-
   forall(
     seed_by_type(stale, Seed),
     retract_seed(Seed)
@@ -20,9 +30,12 @@ clear_all :-
 
 
 
-reset_processing :-
+%! reset_seeds_by_status(+Status:oneof([idle,processing,stale])) is det.
+
+reset_seeds_by_status(Status) :-
+  must_be(oneof([idle,processing,stale]), Status),
   forall(
-    seed_by_type(processing, Seed),
+    seed_by_type(Status, Seed),
     (
       retract_seed(Seed),
       assert_seed(Seed)
