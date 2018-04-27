@@ -1,4 +1,4 @@
-:- module(reset_seeds, [run/0]).
+:- module(reset_seeds, [clear_all/0,reset_processing/0]).
 
 /** <module> Reset seeds in LOD Seedlist
 
@@ -12,7 +12,15 @@
 
 
 
-run :-
+clear_all :-
+  forall(
+    seed_by_type(stale, Seed),
+    retract_seed(Seed)
+  ).
+
+
+
+reset_processing :-
   forall(
     seed_by_type(processing, Seed),
     (
