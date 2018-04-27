@@ -45,6 +45,7 @@
 %! assert_seed(+Uri:atom) is det.
 
 assert_seed(Uri) :-
+  must_be(atom, Uri),
   assert_seeds([Uri]).
 
 
