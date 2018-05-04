@@ -1,6 +1,6 @@
-:- module(upload_index, [run/0]).
+:- module(lod_laundromat_index, [run/0]).
 
-/** <module> LOD Index uploader
+/** <module> LOD Laundromat → LOD Index
 
 @author Wouter Beek
 @version 2018
@@ -24,4 +24,4 @@ run :-
     void-'http://rdfs.org/ns/void#',
     xsd-'http://www.w3.org/2001/XMLSchema#'
   ],
-  dataset_upload(wouter, index, _{files: Files, prefixes: Prefixes}).
+  dataset_upload(ll, 'lod-laundromat', index, _{files: Files, prefixes: Prefixes}).

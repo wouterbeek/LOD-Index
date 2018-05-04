@@ -1,6 +1,6 @@
-:- module(lod_cloud, [run/0]).
+:- module(lod_cloud_index, [run/0]).
 
-/** <module> LOD Cloud
+/** <module> LOD Cloud → LOD Index
 
 Uploads the index for the LOD Cloud picture.
 

@@ -1,17 +1,18 @@
 :- module(
-  seedlist_client,
+  lod_index,
   [
-    assert_seed/1,  % +Uri
-    assert_seeds/1, % +Uris
-    retract_seed/1, % +Seed
-    seed/1,         % -Seed
-    seed_by_type/2  % -Seed
+    reset_seeds/0,
+    upload/1       % +User
   ]
 ).
 
-/** <module> LOD Seedlist Client
+/** <module> LOD Index script
 
-@author Wouer Beek
+Simple scripts for interacting with the LOD Index.
+
+---
+
+@author Wouter Beek
 @version 2018
 */
 
@@ -23,6 +24,9 @@
 
 :- use_module(library(conf_ext)).
 :- use_module(library(http/http_client2)).
+:- use_module(library(http/tapir)).
+:- use_module(library(sw/rdf_prefix)).
+:- use_module(library(sw/rdf_term)).
 :- use_module(library(uri_ext)).
 
 :- initialization
@@ -30,6 +34,8 @@
 
 :- meta_predicate
     seedlist_request_(+, +, 1, +).
+
+:- rdf_assert_prefix(dcat, 'http://www.w3.org/ns/dcat#').
 
 :- setting(authority, any, _,
            "URI scheme of the LOD Seedlist server location.").
@@ -41,6 +47,46 @@
 
 
 
+
+% SCRIPT %
+
+%! reset_seeds is det.
+%
+% Reset all seeds in LOD Seedlist.
+
+reset_seeds :-
+  forall(
+    (
+      member(Status, [idle,processing]),
+      seed_by_type(Status, Seed)
+    ),
+    (
+      retract_seed(Seed),
+      assert_seed(Seed.url)
+    )
+  ).
+
+
+
+%! upload(+User:oneof(['lod-cloud','lod-laundromat'])) is det.
+%
+% Upload the LOD Index of User to LOD Seedlist.
+
+upload(User) :-
+  forall(
+    findnsols(1 000, Uri, uri_(User, Uri), Uris),
+    assert_seeds(Uris)
+  ).
+
+uri_(User, Uri) :-
+  statement(ll, User, index, _, dcat:downloadURL, Uri0, _),
+  rdf_literal_value(Uri0, Uri).
+
+
+
+
+
+% API %
 
 %! assert_seed(+Uri:atom) is det.
 
