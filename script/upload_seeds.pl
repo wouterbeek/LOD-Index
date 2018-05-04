@@ -33,7 +33,7 @@ assertall_seeds :-
   ).
 
 url_(Uri) :-
-  statement(wouter, index, _, dcat:downloadURL, Uri0),
+  statement(ll, 'lod-cloud', index, _, dcat:downloadURL, Uri0, _),
   rdf_literal_value(Uri0, Uri).
 
 
