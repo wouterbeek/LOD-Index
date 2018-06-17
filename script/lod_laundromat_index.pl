@@ -6,7 +6,7 @@
 @version 2018
 */
 
-:- use_module(library(http/tapir)).
+:- use_module(library(tapir/tapir_api)).
 
 run :-
   expand_file_name('../data/*.ttl', Files),

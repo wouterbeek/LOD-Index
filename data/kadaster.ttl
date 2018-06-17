@@ -29,7 +29,7 @@ data:bag a dcat:Dataset ;
     topic:geography ,
     topic:netherlands ;
   dct:publisher org:kadaster ;
-  rdfs:label "Basisregistratie Gebouwen (BAG)"@nl .
+  rdfs:label "Basisregistratie Gebouwen (BAG)"@nl-nl .
 
 data:brk a dcat:Dataset ;
   dcat:distribution dist:brk ;
@@ -37,7 +37,7 @@ data:brk a dcat:Dataset ;
     topic:geography ,
     topic:netherlands ;
   dct:publisher org:kadaster ;
-  rdfs:label "Basisregistratie Kadaster (BRK)"@nl .
+  rdfs:label "Basisregistratie Kadaster (BRK)"@nl-nl .
 
 data:brt a dcat:Dataset ;
   dcat:distribution dist:brt ;
@@ -45,7 +45,7 @@ data:brt a dcat:Dataset ;
     topic:geography ,
     topic:netherlands ;
   dct:publisher org:kadaster ;
-  rdfs:label "Basisregistratie Topografie (BRT)"@nl .
+  rdfs:label "Basisregistratie Topografie (BRT)"@nl-nl .
 
 
 
@@ -69,4 +69,4 @@ dist:brt a dcat:Distribution ;
 
 org:kadaster a foaf:Organization ;
   foaf:homepage "https://data.pdok.nl"^^xsd:anyURI ;
-  rdfs:label "Kadaster"@nl .
+  rdfs:label "Kadaster"@nl-nl .

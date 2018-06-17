@@ -13,11 +13,11 @@ Uploads the index for the LOD Cloud picture.
 :- use_module(library(settings)).
 :- use_module(library(zlib)).
 
-:- use_module(library(http/tapir)).
 :- use_module(library(sw/rdf_export)).
 :- use_module(library(sw/rdf_mem)).
 :- use_module(library(sw/rdf_prefix)).
 :- use_module(library(sw/rdf_term)).
+:- use_module(library(tapir/tapir_api)).
 
 :- maplist(rdf_assert_prefix, [
      data-'https://index.lodlaundromat.org/dataset/',
