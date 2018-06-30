@@ -1,11 +1,15 @@
-:- module(ckan_index, [site_index/0,site_index/1]).
+:- module(ckan_index, [run/0,run/1]).
 
+:- use_module(library(aggregate)).
 :- use_module(library(apply)).
-:- use_module(library(filesex)).
 :- use_module(library(http/json)).
+:- use_module(library(settings)).
 :- use_module(library(zlib)).
 
+:- use_module(library(conf_ext)).
 :- use_module(library(dict)).
+:- use_module(library(file_ext)).
+:- use_module(library(http/ckan_api)).
 :- use_module(library(http/ckan_export)).
 :- use_module(library(http/http_client2)).
 :- use_module(library(pp)).
@@ -14,6 +18,9 @@
 :- use_module(library(sw/rdf_term)).
 :- use_module(library(tapir/tapir_api)).
 :- use_module(library(uri_ext)).
+
+:- initialization
+   init_ckan_index.
 
 :- maplist(rdf_assert_prefix, [
      data-'https://index.lodlaundromat.org/dataset/',
@@ -29,29 +36,32 @@
      xsd-'http://www.w3.org/2001/XMLSchema#'
    ]).
 
+:- setting(data_directory, any, _, "").
 
 
-site_index :-
-  site_index(
-    _{
-      dir: 'opendata.oorlogsbronnen.nl-2018-6-17',
-      lang: 'nl-nl',
-      url: 'https://opendata.oorlogsbronnen.nl/'
-    }
-  ).
 
-site_index(Conf) :-
-  _{dir: Dir, lang: LTag, url: _Uri} :< Conf,
-  %ckan_export(Uri, Dir),
-  site_index_datasets(Dir, LTag).
+run :-
+  run('https://opendata.oorlogsbronnen.nl/').
 
-site_index_datasets(Dir, LTag) :-
-  open_json(Dir, organization, OrgDicts),
-  maplist(assert_organization(LTag), OrgDicts),
-  open_json(Dir, package, DatasetDicts),
-  maplist(assert_dataset(LTag), DatasetDicts).
+run(Uri) :-
+  setting(data_directory, Dir1),
+  ckan_uri_directory(Dir1, Uri, Dir2),
+  create_directory(Dir2),
+  %ckan_export(Uri, Dir2),
+  directory_file_path(Dir2, img, Dir3),
+  create_directory(Dir3),
+  open_json(Dir2, organization, OrgDicts),
+  maplist(assert_organization(Dir3), OrgDicts),
+  open_json(Dir2, package, DatasetDicts),
+  maplist(assert_dataset, DatasetDicts),
+  %aggregate_all(set(Image), directory_path(Dir3, Image), Images),
+  directory_file_path(Dir2, 'index.nt.gz', File),
+  rdf_save(File),
+  %uri_hash(Uri, Hash),
+  %dataset_upload(Hash, _{accessLevel: public, assets: Images, files: ['index.nt.gz']}),
+  true.
 
-assert_dataset(LTag, DatasetDict) :-
+assert_dataset(DatasetDict) :-
   _{
     'license_id': LicenseId,
     name: DatasetLocal,
@@ -61,63 +71,62 @@ assert_dataset(LTag, DatasetDict) :-
     title: Title,
     url: Uri
   } :< DatasetDict,
-  _{
-    name: OrgLocal
-  } :< OrgDict,
+  _{name: OrgLocal} :< OrgDict,
   rdf_global_id(data:DatasetLocal, Dataset),
   rdf_assert_triple('https://index.lodlaundromat.org', ldm:dataset, Dataset),
   rdf_assert_triple(Dataset, rdf:type, ldm:'Dataset'),
   (   Description \== ''
-  ->  rdf_assert_triple(Dataset, dct:description, literal(lang(LTag,Description)))
+  ->  rdf_assert_triple(Dataset, dct:description, str(Description))
   ;   true
   ),
   license_uri(LicenseId, License),
   rdf_global_id(org:OrgLocal, Org),
   rdf_assert_triple(Dataset, dct:creator, Org),
   rdf_assert_triple(Dataset, dct:license, License),
-  rdf_assert_triple(Dataset, dct:title, literal(lang(LTag,Title))),
+  rdf_assert_triple(Dataset, dct:title, str(Title)),
   (   Uri \== ''
-  ->  rdf_assert_triple(Dataset, foaf:homepage, literal(type(xsd:anyURI,Uri)))
+  ->  rdf_assert_triple(Dataset, foaf:homepage, uri(Uri))
   ;   true
   ),
-  rdf_assert_triple(Dataset, rdfs:label, literal(lang(LTag,Title))),
+  rdf_assert_triple(Dataset, rdfs:label, str(Title)),
   rdf_global_id(dist:DatasetLocal, Distribution),
   rdf_assert_triple(Distribution, rdf:type, ldm:'Distribution'),
   rdf_assert_triple(Dataset, ldm:distribution, Distribution),
-  maplist(assert_distribution(LTag, Distribution), ResourceDicts).
+  maplist(assert_distribution(Distribution), ResourceDicts).
 
-assert_distribution(LTag, Distribution, ResourceDict) :-
+assert_distribution(Distribution, ResourceDict) :-
   _{description: Description, id: Local, name: Name, url: Uri} :< ResourceDict,
   (   Uri \== ''
   ->  rdf_global_id(file:Local, File),
       rdf_assert_triple(Distribution, ldm:file, File),
-      rdf_assert_triple(File, ldm:downloadLocation, literal(type(xsd:anyURI,Uri))),
+      rdf_assert_triple(File, ldm:downloadLocation, uri(Uri)),
       (   Description \== ''
-      ->  rdf_assert_triple(File, dct:description, literal(lang(LTag,Description)))
+      ->  rdf_assert_triple(File, dct:description, str(Description))
       ;   true
       ),
-      rdf_assert_triple(File, dct:title, literal(lang(LTag,Name))),
-      rdf_assert_triple(File, rdfs:label, literal(lang(LTag,Name)))
+      rdf_assert_triple(File, dct:title, str(Name)),
+      rdf_assert_triple(File, rdfs:label, str(Name))
   ;   true
   ).
 
-assert_organization(LTag, OrgDict) :-
+assert_organization(Dir, OrgDict) :-
   _{description: Description, image_url: ImageUri1, name: Local, title: Name} :< OrgDict,
   rdf_global_id(org:Local, Org),
   rdf_assert_triple(Org, rdf:type, foaf:'Org'),
   (   Description \== ''
-  ->  rdf_assert_triple(Org, dct:description, literal(lang(LTag,Description)))
+  ->  rdf_assert_triple(Org, dct:description, str(Description))
   ;   true
   ),
-  rdf_assert_triple(Org, dct:title, literal(lang(LTag,Name))),
+  rdf_assert_triple(Org, dct:title, str(Name)),
   image_uri_file(Local, ImageUri1, ImageFile),
+  directory_file_path(Dir, ImageFile, ImagePath),
   (   is_uri(ImageUri1)
-  ->  http_download(ImageUri1, ImageFile),
+  ->  http_download(ImageUri1, ImagePath),
       triply_image_uri(wouter, index, ImageFile, ImageUri2),
-      rdf_assert_triple(Org, foaf:depiction, literal(type(xsd:anyURI,ImageUri2)))
+      rdf_assert_triple(Org, foaf:depiction, uri(ImageUri2))
   ;   true
   ),
-  rdf_assert_triple(Org, rdfs:label, literal(lang(LTag,Name))).
+  rdf_assert_triple(Org, rdfs:label, str(Name)).
 
 image_uri_file(Local, Uri, File) :-
   member(Ext, [gif,jpeg,jpg,png]),
@@ -135,12 +144,22 @@ triply_image_uri(User, Dataset, File, Uri) :-
     Uri,
     uri(
       https,
-      'nightly.triply.cc',
+      'data.lodlaundromat.org',
       ['_api',datasets,User,Dataset,assets,download],
       [fileName(File)],
       _
     )
   ).
+
+
+
+% INITIALIZATION %
+
+init_ckan_index :-
+  conf_json(Conf),
+  directory_file_path(Conf.'data-directory', 'LOD-Index', Dir),
+  create_directory(Dir),
+  set_setting(data_directory, Dir).
 
 
 

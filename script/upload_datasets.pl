@@ -22,7 +22,7 @@
    init_upload_datasets.
 
 :- maplist(rdf_assert_prefix, [
-     dcat-'http://www.w3.org/ns/dcat#',
+     ldm-'https://ldm.cc/',
      rdf-'http://www.w3.org/1999/02/22-rdf-syntax-ns#'
    ]).
 
@@ -30,11 +30,9 @@
 
 
 
-
-
 run :-
   forall(
-    statement(wouter, index, Dataset, rdf:type, dcat:'Dataset'),
+    statement(wouter, index, Dataset, rdf:type, ldm:'Dataset'),
     upload_dataset_(Dataset)
   ).
 
@@ -50,8 +48,9 @@ upload_dataset_(Dataset) :-
   findall(
     File,
     (
-      rdf_triple(Dataset, dcat:distribution, Distribution),
-      rdf_triple(Distribution, dcat:downloadURL, Uri0),
+      rdf_triple(Dataset, ldm:distribution, Distribution),
+      rdf_triple(Distribution, ldm:file, File0),
+      rdf_triple(File0, ldm:downloadLocation, Uri0),
       rdf_literal_value(Uri0, Uri),
       md5(Uri, Hash),
       directory_file_path(Dir0, Hash, Dir),
@@ -77,8 +76,6 @@ upload_dataset_(Dataset) :-
   ),
   dataset_upload(User, Dataset, Properties4),
   debug(ll, "DONE ~a ~a", [User,Dataset]).
-
-
 
 
 
