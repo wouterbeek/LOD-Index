@@ -1,9 +1,8 @@
-prefix dcat: <http://www.w3.org/ns/dcat#>
 prefix dct: <http://purl.org/dc/terms/>
 prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix ldm: <https://ldm.cc/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
-prefix void: <http://rdfs.org/ns/void#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 
 prefix data: <https://index.lodlaundromat.org/dataset/>
@@ -13,8 +12,8 @@ prefix topic: <https://index.lodlaundromat.org/topic/>
 
 # Catalog
 
-<https://index.lodlaundromat.org> a dcat:Catalog ;
-  dcat:dataset
+<https://index.lodlaundromat.org> a ldm:Catalog ;
+  ldm:dataset
     data:affymetrix ,
     data:bioportal ,
     data:clinicaltrials ,
@@ -49,192 +48,192 @@ prefix topic: <https://index.lodlaundromat.org/topic/>
 
 # Datasets
 
-data:affymetrix a dcat:Dataset ;
-  dcat:distribution dist:affymetrix ;
-  dcat:theme topic:biomedical ;
+data:affymetrix a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:affymetrix ;
   rdfs:label "Affymetrix"@en .
 
-data:bioportal a dcat:Dataset ;
-  dcat:distribution dist:bioportal ;
-  dcat:theme topic:biomedical ;
+data:bioportal a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:bioportal ;
   rdfs:label "Bioportal"@en .
 
-data:clinicaltrials a dcat:Dataset ;
-  dcat:distribution dist:clinicaltrials ;
-  dcat:theme topic:biomedical ;
+data:clinicaltrials a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:clinicaltrials ;
   rdfs:label "Clinical trials"@en .
 
-data:ctd a dcat:Dataset ;
-  dcat:distribution dist:ctd ;
-  dcat:theme topic:biomedical ;
+data:ctd a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:ctd ;
   rdfs:label "ctd"@en .
 
-data:dbsnp a dcat:Dataset ;
-  dcat:distribution dist:dbsnp ;
-  dcat:theme topic:biomedical ;
+data:dbsnp a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:dbsnp ;
   rdfs:label "dbsnp"@en .
 
-data:drugbank a dcat:Dataset ;
-  dcat:distribution dist:drugbank ;
-  dcat:theme topic:biomedical ;
+data:drugbank a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:drugbank ;
   rdfs:label "Drugbank"@en .
 
-data:genage a dcat:Dataset ;
-  dcat:distribution dist:genage ;
-  dcat:theme topic:biomedical ;
+data:genage a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:genage ;
   rdfs:label "genage"@en .
 
-data:gendr a dcat:Dataset ;
-  dcat:distribution dist:gendr ;
-  dcat:theme topic:biomedical ;
+data:gendr a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:gendr ;
   rdfs:label "gendr"@en .
 
-data:goa a dcat:Dataset ;
-  dcat:distribution dist:goa ;
-  dcat:theme topic:biomedical ;
+data:goa a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:goa ;
   rdfs:label "goa"@en .
 
-data:hgnc a dcat:Dataset ;
-  dcat:distribution dist:hgnc ;
-  dcat:theme topic:biomedical ;
+data:hgnc a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:hgnc ;
   rdfs:label "hgnc"@en .
 
-data:homologene a dcat:Dataset ;
-  dcat:distribution dist:homologene ;
-  dcat:theme topic:biomedical ;
+data:homologene a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:homologene ;
   rdfs:label "homologene"@en .
 
-data:irefindex a dcat:Dataset ;
-  dcat:distribution dist:irefindex ;
-  dcat:theme topic:biomedical ;
+data:irefindex a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:irefindex ;
   rdfs:label "irefindex"@en .
 
-data:interpro a dcat:Dataset ;
-  dcat:distribution dist:interpro ;
-  dcat:theme topic:biomedical ;
+data:interpro a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:interpro ;
   rdfs:label "interpro"@en .
 
-data:kegg a dcat:Dataset ;
-  dcat:distribution dist:kegg ;
-  dcat:theme topic:biomedical ;
+data:kegg a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:kegg ;
   rdfs:label "kegg"@en .
 
-data:lsr a dcat:Dataset ;
-  dcat:distribution dist:lsr ;
-  dcat:theme topic:biomedical ;
+data:lsr a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:lsr ;
   rdfs:label "lsr"@en .
 
-data:mesh a dcat:Dataset ;
-  dcat:distribution dist:mesh ;
-  dcat:theme topic:biomedical ;
+data:mesh a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:mesh ;
   rdfs:label "mesh"@en .
 
-data:mgi a dcat:Dataset ;
-  dcat:distribution dist:mgi ;
-  dcat:theme topic:biomedical ;
+data:mgi a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:mgi ;
   rdfs:label "mgi"@en .
 
-data:miriam a dcat:Dataset ;
-  dcat:distribution dist:miriam ;
-  dcat:theme topic:biomedical ;
+data:miriam a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:miriam ;
   rdfs:label "miriam"@en .
 
-data:ncbigene a dcat:Dataset ;
-  dcat:distribution dist:ncbigene ;
-  dcat:theme topic:biomedical ;
+data:ncbigene a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:ncbigene ;
   rdfs:label "ncbigene"@en .
 
-data:ndc a dcat:Dataset ;
-  dcat:distribution dist:ndc ;
-  dcat:theme topic:biomedical ;
+data:ndc a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:ndc ;
   rdfs:label "ndc"@en .
 
-data:orphanet a dcat:Dataset ;
-  dcat:distribution dist:orphanet ;
-  dcat:theme topic:biomedical ;
+data:orphanet a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:orphanet ;
   rdfs:label "orphanet"@en .
 
-data:omim a dcat:Dataset ;
-  dcat:distribution dist:omim ;
-  dcat:theme topic:biomedical ;
+data:omim a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:omim ;
   rdfs:label "omim"@en .
 
-data:pharmgkb a dcat:Dataset ;
-  dcat:distribution dist:pharmgkb ;
-  dcat:theme topic:biomedical ;
+data:pharmgkb a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:pharmgkb ;
   rdfs:label "pharmgkb"@en .
 
-data:pubmed a dcat:Dataset ;
-  dcat:distribution dist:pubmed ;
-  dcat:theme topic:biomedical ;
+data:pubmed a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:pubmed ;
   rdfs:label "Pubmed"@en .
 
-data:refseq a dcat:Dataset ;
-  dcat:distribution dist:refseq ;
-  dcat:theme topic:biomedical ;
+data:refseq a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:refseq ;
   rdfs:label "refseq"@en .
 
-data:sgd a dcat:Dataset ;
-  dcat:distribution dist:sgd ;
-  dcat:theme topic:biomedical ;
+data:sgd a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:sgd ;
   rdfs:label "sgd"@en .
 
-data:sider a dcat:Dataset ;
-  dcat:distribution dist:sider ;
-  dcat:theme topic:biomedical ;
+data:sider a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:sider ;
   rdfs:label "sider"@en .
 
-data:taxonomy a dcat:Dataset ;
-  dcat:distribution dist:taxonomy ;
-  dcat:theme topic:biomedical ;
+data:taxonomy a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:taxonomy ;
   rdfs:label "Taxonomy"@en .
 
-data:wormbase a dcat:Dataset ;
-  dcat:distribution dist:wormbase ;
-  dcat:theme topic:biomedical ;
+data:wormbase a ldm:Dataset ;
   dct:publisher org:bio2rdf ;
+  dct:subject topic:biomedical ;
+  ldm:distribution dist:wormbase ;
   rdfs:label "Wormbase"@en .
 
 
 
 # Distributions
 
-dist:affymetrix a dcat:Distribution ;
-  dcat:downloadURL
+dist:affymetrix a ldm:Distribution ;
+  ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/affymetrix/affymetrix.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/affymetrix/bio2rdf-affymetrix.nq"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:bioportal a dcat:Distribution ;
-  dcat:downloadURL
+dist:bioportal a ldm:Distribution ;
+  ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/bioportal/aba-amb.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/bioportal/acgt-mo.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/bioportal/adar.nq.gz"^^xsd:anyURI ,
@@ -601,16 +600,16 @@ dist:bioportal a dcat:Distribution ;
     "http://download.bio2rdf.org/files/release/4/bioportal/xeo.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/bioportal/zea.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/bioportal/zfa.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:clinicaltrials a dcat:Distribution ;
-  dcat:downloadURL
+dist:clinicaltrials a ldm:Distribution ;
+  ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/clinicaltrials/bio2rdf-clinicaltrials.nq"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/clinicaltrials/clinicaltrials.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:ctd a dcat:Distribution ;
-  dcat:downloadURL
+dist:ctd a ldm:Distribution ;
+  ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/ctd/bio2rdf-ctd.nq"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/ctd/ctd_chem_gene_ixn_types.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/ctd/ctd_chem_gene_ixns.nq.gz"^^xsd:anyURI ,
@@ -624,35 +623,35 @@ dist:ctd a dcat:Distribution ;
     "http://download.bio2rdf.org/files/release/4/ctd/ctd_genes_diseases.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/ctd/ctd_genes_pathways.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/ctd/ctd_pathways.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:dbsnp a dcat:Distribution ;
-   dcat:downloadURL
+dist:dbsnp a ldm:Distribution ;
+   ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/dbsnp/bio2rdf-dbsnp.nq"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/dbsnp/dbsnp.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:drugbank a dcat:Distribution ;
-  dcat:downloadURL
+dist:drugbank a ldm:Distribution ;
+  ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/drugbank/bio2rdf-drugbank.nq"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/drugbank/drugbank.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:genage a dcat:Distribution ;
-   dcat:downloadURL
+dist:genage a ldm:Distribution ;
+   ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/genage/bio2rdf-genage.nq"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/genage/genage_human.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/genage/genage_models.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:gendr a dcat:Distribution ;
-  dcat:downloadURL
+dist:gendr a ldm:Distribution ;
+  ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/gendr/bio2rdf-gendr.nq"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/gendr/gendr_gene_manipulations.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:goa a dcat:Distribution ;
-  dcat:downloadURL
+dist:goa a ldm:Distribution ;
+  ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/goa/bio2rdf-goa.nq"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/goa/goa_arabidopsis.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/goa/goa_chicken.nq.gz"^^xsd:anyURI ,
@@ -667,34 +666,34 @@ dist:goa a dcat:Distribution ;
     "http://download.bio2rdf.org/files/release/4/goa/goa_worm.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/goa/goa_yeast.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/goa/goa_zebrafish.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:hgnc a dcat:Distribution ;
-  dcat:downloadURL
+dist:hgnc a ldm:Distribution ;
+  ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/hgnc/bio2rdf-hgnc.nq"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/hgnc/hgnc.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:homologene a dcat:Distribution ;
-  dcat:downloadURL
+dist:homologene a ldm:Distribution ;
+  ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/homologene/bio2rdf-homologene.nq"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/homologene/homologene.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:irefindex a dcat:Distribution ;
-  dcat:downloadURL
+dist:irefindex a ldm:Distribution ;
+  ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/irefindex/bio2rdf-irefindex.nq"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/irefindex/irefindex-all.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:interpro a dcat:Distribution ;
-  dcat:downloadURL
+dist:interpro a ldm:Distribution ;
+  ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/interpro/bio2rdf-interpro.nq"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/interpro/interpro.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:kegg a dcat:Distribution ;
-  dcat:downloadURL
+dist:kegg a ldm:Distribution ;
+  ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/kegg/bio2rdf-kegg.nq"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/kegg/kegg-compound.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/kegg/kegg-disease.nq.gz"^^xsd:anyURI ,
@@ -710,24 +709,24 @@ dist:kegg a dcat:Distribution ;
     "http://download.bio2rdf.org/files/release/4/kegg/kegg-rclass.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/kegg/kegg-reaction.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/kegg/kegg-rpair.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:lsr a dcat:Distribution ;
-  dcat:downloadURL
+dist:lsr a ldm:Distribution ;
+  ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/lsr/bio2rdf-lsr.nq"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/lsr/lsr.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:mesh a dcat:Distribution ;
-  dcat:downloadURL
+dist:mesh a ldm:Distribution ;
+  ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/mesh/bio2rdf-mesh.nq"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/mesh/mesh_descriptors.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/mesh/mesh_qualifiers.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/mesh/mesh_supplementary.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:mgi a dcat:Distribution ;
-  dcat:downloadURL
+dist:mgi a ldm:Distribution ;
+  ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/mgi/MGI_GenePheno.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/mgi/MGI_Geno_Disease.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/mgi/MGI_Geno_NotDisease.nq.gz"^^xsd:anyURI ,
@@ -735,14 +734,14 @@ dist:mgi a dcat:Distribution ;
     "http://download.bio2rdf.org/files/release/4/mgi/MGI_Strain.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/mgi/MRK_Sequence.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/mgi/bio2rdf-mgi.nq"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:miriam a dcat:Distribution ;
-  dcat:downloadURL "http://download.bio2rdf.org/files/release/4/miriam/miriam.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+dist:miriam a ldm:Distribution ;
+  ldm:downloadLocation "http://download.bio2rdf.org/files/release/4/miriam/miriam.nq.gz"^^xsd:anyURI ;
+  ldm:mediaType "application/n-quads" .
 
-dist:ncbigene a dcat:Distribution ;
-  dcat:downloadURL
+dist:ncbigene a ldm:Distribution ;
+  ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/ncbigene/bio2rdf-ncbigene.nq"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/ncbigene/gene2accession.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/ncbigene/gene2ensembl.nq.gz"^^xsd:anyURI ,
@@ -753,37 +752,37 @@ dist:ncbigene a dcat:Distribution ;
     "http://download.bio2rdf.org/files/release/4/ncbigene/gene2unigene.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/ncbigene/gene2vega.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/ncbigene/geneinfo.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:ndc a dcat:Distribution ;
-  dcat:downloadURL
+dist:ndc a ldm:Distribution ;
+  ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/ndc/bio2rdf-ndc.nq"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/ndc/ndc.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:orphanet a dcat:Distribution ;
-  dcat:downloadURL
+dist:orphanet a ldm:Distribution ;
+  ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/orphanet/bio2rdf-orphanet.nq"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:omim a dcat:Distribution ;
-  dcat:downloadURL
+dist:omim a ldm:Distribution ;
+  ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/omim/bio2rdf-omim.nq"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/omim/omim.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:pharmgkb a dcat:Distribution ;
-  dcat:downloadURL
+dist:pharmgkb a ldm:Distribution ;
+  ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/pharmgkb/annotations.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/pharmgkb/bio2rdf-pharmgkb.nq"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/pharmgkb/diseases.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/pharmgkb/drugs.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/pharmgkb/genes.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/pharmgkb/relationships.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:pubmed a dcat:Distribution ;
-  dcat:downloadURL
+dist:pubmed a ldm:Distribution ;
+  ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/pubmed/bio2rdf-pubmed.nq"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/pubmed/medline15n0001.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/pubmed/medline15n0002.nq.gz"^^xsd:anyURI ,
@@ -1935,10 +1934,10 @@ dist:pubmed a dcat:Distribution ;
     "http://download.bio2rdf.org/files/release/4/pubmed/medline15n1148.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/pubmed/medline15n1149.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/pubmed/medline15n1150.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:refseq a dcat:Distribution ;
-  dcat:downloadURL
+dist:refseq a ldm:Distribution ;
+  ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/refseq/complete.1012.protein.gpff.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/refseq/complete.1016.protein.gpff.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/refseq/complete.1018.protein.gpff.nq.gz"^^xsd:anyURI ,
@@ -2562,41 +2561,41 @@ dist:refseq a dcat:Distribution ;
     "http://download.bio2rdf.org/files/release/4/refseq/complete.987.protein.gpff.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/refseq/complete.995.protein.gpff.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/refseq/complete.997.protein.gpff.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:sgd a dcat:Distribution ;
-  dcat:downloadURL
+dist:sgd a ldm:Distribution ;
+  ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/sgd/bio2rdf-sgd.nq"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/sgd/sgd.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:sider a dcat:Distribution ;
-  dcat:downloadURL
+dist:sider a ldm:Distribution ;
+  ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/sider/bio2rdf-sider.nq"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/sider/sider-freq.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/sider/sider-indications.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/sider/sider-se.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:taxonomy a dcat:Distribution ;
-  dcat:downloadURL
+dist:taxonomy a ldm:Distribution ;
+  ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/taxonomy/bio2rdf-taxonomy.nq"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/taxonomy/taxonomy-citations.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/taxonomy/taxonomy-division.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/taxonomy/taxonomy-gencode.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/taxonomy/taxonomy-names.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/taxonomy/taxonomy-nodes.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
-dist:wormbase a dcat:Distribution ;
-  dcat:downloadURL
+dist:wormbase a ldm:Distribution ;
+  ldm:downloadLocation
     "http://download.bio2rdf.org/files/release/4/wormbase/bio2rdf-wormbase.nq"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/wormbase/wormbase.functional_descriptions.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/wormbase/wormbase.geneIDs.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/wormbase/wormbase.gene_associations.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/wormbase/wormbase.gene_interactions.nq.gz"^^xsd:anyURI ,
     "http://download.bio2rdf.org/files/release/4/wormbase/wormbase.phenotype_associations.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
+  ldm:mediaType "application/n-quads" .
 
 
 

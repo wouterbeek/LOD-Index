@@ -1,9 +1,8 @@
-prefix dcat: <http://www.w3.org/ns/dcat#>
 prefix dct: <http://purl.org/dc/terms/>
 prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix ldm: <https://ldm.cc/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
-prefix void: <http://rdfs.org/ns/void#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 
 prefix data: <https://index.lodlaundromat.org/dataset/>
@@ -11,10 +10,8 @@ prefix dist: <https://index.lodlaundromat.org/distribution/>
 prefix org: <https://index.lodlaundromat.org/organization/>
 prefix topic: <https://index.lodlaundromat.org/topic/>
 
-# Catalog
-
-<https://index.lodlaundromat.org> a dcat:Catalog ;
-  dcat:dataset
+<https://index.lodlaundromat.org> a ldm:Catalog ;
+  ldm:dataset
     data:beeldbank ,
     data:cia-world-factbook ,
     data:energiebesparingspotentie ,
@@ -25,132 +22,6 @@ prefix topic: <https://index.lodlaundromat.org/topic/>
     data:sameas-schema ,
     data:w3c-technical-reports ,
     data:wijk-en-buurt-kaart .
-
-
-
-# Datasets
-
-data:beeldbank a dcat:Dataset ;
-  dcat:distribution dist:beeldbank ;
-  dcat:theme
-    topic:history ,
-    topic:netherlands ,
-    topic:photography ;
-  dct:publisher org:rce ;
-  rdfs:label "Beeldbank"@nl .
-
-data:cia-world-factbook a dcat:Dataset ;
-  dcat:distribution dist:cia-world-factbook ;
-  dct:description "The World Factbook provides information on the history, people, government, economy, geography, communications, transportation, military, and transnational issues for 267 world entities.  Our Reference tab includes: maps of the major world regions, as well as Flags of the World, a Physical Map of the World, a Political Map of the World, a World Oceans map, and a Standard Time Zones of the World map."@en ;
-  dct:publisher org:cia ;
-  rdfs:label "CIA World Factbook"@en .
-
-data:energiebesparingspotentie a dcat:Dataset ;
-  dcat:distribution dist:energiebesparingspotentie ;
-  dcat:theme
-    topic:energy ,
-    topic:geography ,
-    topic:statistics ;
-  dct:publisher org:cbs ;
-  rdfs:label "Energiebesparingspotentie"@nl .
-
-data:lov a dcat:Dataset ;
-  dcat:distribution
-    dist:lov-n3 ,
-    dist:lov-nq ;
-  dcat:theme topic:semantics ;
-  dct:description "LOV stands for Linked Open Vocabularies. This name is derived from LOD, standing for Linked Open Data. A vocabulary in LOV gathers definitions of a set of classes and properties (together simply called terms of the vocabulary), useful to describe specific types of things, or things in a given domain or industry, or things at large but for a specific usage. Terms of vocabularies also provide the links in linked data, in the above case between a Person and a City. The definitions of terms provided by the vocabularies bring clear semantics to descriptions and links, thanks to the formal language they use (some dialect of RDF such as RDFS or OWL). In short, vocabularies provide the semantic glue enabling Data to become meaningful Data."@en ;
-  dct:publisher org:okfn ;
-  rdfs:label "Linked Open Vocabularies (LOV)"@en .
-
-data:monumenten a dcat:Dataset ;
-  dcat:distribution dist:monumenten ;
-  dcat:theme
-    topic:history ,
-    topic:netherlands ;
-  dct:publisher org:rce ;
-  rdfs:label "Monumenten"@nl .
-
-data:opencourseware a dcat:Dataset ;
-  dcat:distribution dist:opencourseware ;
-  dcat:topic topic:education ;
-  dct:description "Some of the MIT OpenCourseWare Material RDF-ized by the SIMILE Team."@en ;
-  dct:publisher org:mit ;
-  rdfs:label "OpenCourseWare"@en .
-
-data:sameas a dcat:Dataset ;
-  dcat:distribution dist:sameas ;
-  dcat:theme topic:owl ;
-  dct:publischer org:krr ;
-  rdfs:label "owl:sameAs"@en .
-
-data:sameas-schema a dcat:Dataset ;
-  dcat:distribution dist:sameas-schema ;
-  dcat:theme topic:owl ;
-  dct:publischer org:krr ;
-  rdfs:label "owl:sameAs schema"@en .
-
-data:w3c-technical-reports a dcat:Dataset ;
-  dcat:distribution dist:w3c-technical-reports ;
-  dct:publisher org:w3c ;
-  rdfs:label "W3C technical reports"@en .
-
-data:wijk-en-buurt-kaart a dcat:Dataset ;
-  dcat:distribution dist:wijk-en-buurt-kaart ;
-  dcat:theme
-    topic:geography ,
-    topic:netherlands ,
-    topic:statistics ;
-  dct:publisher org:cbs ;
-  rdfs:label "Wijk- en Buurt kaart"@nl .
-
-
-
-# Distributions
-
-dist:beeldbank a dcat:Distribution ;
-  dcat:downloadURL "https://krr.triply.cc/Kadaster/beeldbank/download.trig.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/trig" .
-
-dist:cia-world-factbook a dcat:Distribution ;
-  dcat:downloadURL "http://simile.mit.edu/repository/datasets/cia-wfb/data/cia-wfb.zip" .
-
-dist:energiebesparingspotentie a dcat:Distribution ;
-  dcat:downloadURL "https://krr.triply.cc/Kadaster/energiepotentie/download.trig.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/trig" .
-
-dist:lov-n3 a dcat:Distribution ;
-  dcat:downloadURL "http://lov.okfn.org/lov.n3.gz"^^xsd:anyURI ;
-  dcat:mediaType "text/n3" .
-
-dist:lov-nq a dcat:Distribution ;
-  dcat:downloadURL "http://lov.okfn.org/lov.nq.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/n-quads" .
-
-dist:monumenten a dcat:Distribution ;
-  dcat:downloadURL "https://krr.triply.cc/Kadaster/monumenten/download.trig.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/trig" .
-
-dist:opencourseware a dist:Distribution ;
-  dcat:downloadURL "http://simile.mit.edu/repository/datasets/ocw/data/ocw.zip"^^xsd:anyURI .
-
-dist:sameas a dcat:Distribution ;
-  dcat:downloadURL "https://krr.triply.cc/wouter/sameAs/download.trig.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/trig" .
-
-dist:sameas-schema a dcat:Distribution ;
-  dcat:downloadURL "https://krr.triply.cc/wouter/sameAs-schema/download.trig.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/trig" .
-
-dist:wijk-en-buurt-kaart a dcat:Distribution ;
-  dcat:downloadURL "https://krr.triply.cc/Kadaster/cbs/download.trig.gz"^^xsd:anyURI ;
-  dcat:mediaType "application/trig" .
-
-dist:w3c-technical-reports a dcat:Distribution ;
-  dcat:downloadURL "http://simile.mit.edu/repository/datasets/w3c-tr/data/w3c-tr.zip"^^xsd:anyURI .
-
-
-# Organizations
 
 org:cbs a foaf:Organization ;
   foaf:homepage "https://www.cbs.nl"^^xsd:anyURi ;
@@ -191,3 +62,208 @@ org:triply a foaf:Organization ;
 org:w3c a foaf:Organization ;
   foaf:homepage "https://w3c.org"^^xsd:anyURI ;
   rdfs:label "World Wide Web Consortium (W3C)"@en .
+
+
+
+# Beeldbank
+
+data:beeldbank a ldm:Dataset ;
+  dct:subject
+    topic:history ,
+    topic:netherlands ,
+    topic:photography ;
+  dct:publisher org:rce ;
+  ldm:distribution dist:beeldbank ;
+  rdfs:label "Beeldbank"@nl .
+
+dist:beeldbank a ldm:Distribution ;
+  ldm:file [
+    ldm:downloadLocation "https://krr.triply.cc/Kadaster/beeldbank/download.trig.gz"^^xsd:anyURI ;
+    ldm:mediaType "application/gzip"
+    ldm:file [
+      ldm:mediaType "application/trig"
+    ]
+  ] .
+
+
+
+# World Factbook
+
+data:cia-world-factbook a ldm:Dataset ;
+  dct:description "The World Factbook provides information on the history, people, government, economy, geography, communications, transportation, military, and transnational issues for 267 world entities.  Our Reference tab includes: maps of the major world regions, as well as Flags of the World, a Physical Map of the World, a Political Map of the World, a World Oceans map, and a Standard Time Zones of the World map."@en ;
+  dct:publisher org:cia ;
+  ldm:distribution dist:cia-world-factbook ;
+  rdfs:label "CIA World Factbook"@en .
+
+dist:cia-world-factbook a ldm:Distribution ;
+  ldm:file [
+    ldm:downloadLocation "http://simile.mit.edu/repository/datasets/cia-wfb/data/cia-wfb.zip"^^xsd:anyURI ;
+    ldm:mediaType "application/zip" ;
+    ldm:file [
+      ldm:mediaType "application/rdf+xml"
+    ]
+  ] .
+
+
+
+# Energiebesparingspotentieel
+
+data:energiebesparingspotentie a ldm:Dataset ;
+  ldm:distribution dist:energiebesparingspotentie ;
+  dct:subject
+    topic:energy ,
+    topic:geography ,
+    topic:statistics ;
+  dct:publisher org:cbs ;
+  rdfs:label "Energiebesparingspotentie"@nl .
+
+dist:energiebesparingspotentie a ldm:Distribution ;
+  ldm:file [
+    ldm:downloadLocation "https://krr.triply.cc/Kadaster/energiepotentie/download.trig.gz"^^xsd:anyURI ;
+    ldm:mediaType "application/gzip" ;
+    ldm:file [
+      ldm:mediaType "application/trig"
+    ]
+  ] .
+
+
+
+# Linked Open Vocabularies (LOV)
+
+data:lov a ldm:Dataset ;
+  dct:description "LOV stands for Linked Open Vocabularies. This name is derived from LOD, standing for Linked Open Data. A vocabulary in LOV gathers definitions of a set of classes and properties (together simply called terms of the vocabulary), useful to describe specific types of things, or things in a given domain or industry, or things at large but for a specific usage. Terms of vocabularies also provide the links in linked data, in the above case between a Person and a City. The definitions of terms provided by the vocabularies bring clear semantics to descriptions and links, thanks to the formal language they use (some dialect of RDF such as RDFS or OWL). In short, vocabularies provide the semantic glue enabling Data to become meaningful Data."@en ;
+  dct:publisher org:okfn ;
+  dct:subject topic:semantics ;
+  ldm:distribution
+    dist:lov-n3 ,
+    dist:lov-nq ;
+  rdfs:label "Linked Open Vocabularies (LOV)"@en .
+
+dist:lov-n3 a ldm:Distribution ;
+  ldm:file [
+    ldm:downloadLocation "http://lov.okfn.org/lov.n3.gz"^^xsd:anyURI ;
+    ldm:mediaType "application/gzip" ;
+    ldm:file [
+      ldm:mediaType "text/n3"
+    ]
+  ] .
+
+dist:lov-nq a ldm:Distribution ;
+  ldm:downloadLocation "http://lov.okfn.org/lov.nq.gz"^^xsd:anyURI ;
+  ldm:mediaType "application/n-quads" .
+
+
+
+# Monumentenregister
+
+data:monumentenregister a ldm:Dataset ;
+  ldm:distribution dist:monumentenregister ;
+  dct:subject
+    topic:history ,
+    topic:netherlands ;
+  dct:publisher org:rce ;
+  rdfs:label "Monumentenregister"@nl .
+
+dist:monumenten a ldm:Distribution ;
+  ldm:file [
+    ldm:downloadLocation "https://krr.triply.cc/Kadaster/monumenten/download.trig.gz"^^xsd:anyURI ;
+    ldm:mediaType "application/trig" ;
+    ldm:file [
+      ldm:mediaType "application/gzip"
+    ]
+  ] .
+
+
+
+# OpenCourseWare
+
+data:opencourseware a ldm:Dataset ;
+  dct:description "Some of the MIT OpenCourseWare Material RDF-ized by the SIMILE Team."@en ;
+  dct:publisher org:mit ;
+  dct:subject topic:education ;
+  ldm:distribution dist:opencourseware ;
+  rdfs:label "OpenCourseWare"@en .
+
+dist:opencourseware a dist:Distribution ;
+  ldm:file [
+    ldm:downloadLocation "http://simile.mit.edu/repository/datasets/ocw/data/ocw.zip"^^xsd:anyURI ;
+    ldm:mediaType "application/zip" ;
+    ldm:file [
+      ldm:mediaType "application/rdf+xml"
+    ]
+  ] .
+
+
+
+# sameAs.cc
+
+data:sameas a ldm:Dataset ;
+  ldm:distribution dist:sameas ;
+  dct:subject topic:owl ;
+  dct:publischer org:krr ;
+  rdfs:label "owl:sameAs"@en .
+
+data:sameas-schema a ldm:Dataset ;
+  ldm:distribution dist:sameas-schema ;
+  dct:subject topic:owl ;
+  dct:publischer org:krr ;
+  rdfs:label "owl:sameAs schema"@en .
+
+dist:sameas a ldm:Distribution ;
+  ldm:file [
+    ldm:downloadLocation "https://krr.triply.cc/wouter/sameAs/download.trig.gz"^^xsd:anyURI ;
+    ldm:mediaType "application/gz" ;
+    ldm:file [
+      ldm:mediaType "application/trig"
+    ]
+  ] .
+
+dist:sameas-schema a ldm:Distribution ;
+  ldm:file [
+    ldm:downloadLocation "https://krr.triply.cc/wouter/sameAs-schema/download.trig.gz"^^xsd:anyURI ;
+    ldm:mediaType "application/gzip" ;
+    ldm:file [
+      ldm:mediaType "application/trig"
+    ]
+  ] .
+
+
+
+# W3C
+
+data:w3c-technical-reports a ldm:Dataset ;
+  ldm:distribution dist:w3c-technical-reports ;
+  dct:publisher org:w3c ;
+  rdfs:label "W3C technical reports"@en .
+
+
+dist:w3c-technical-reports a ldm:Distribution ;
+  ldm:file [
+    ldm:downloadLocation "http://simile.mit.edu/repository/datasets/w3c-tr/data/w3c-tr.zip"^^xsd:anyURI ;
+    ldm:mediaType "application/zip" ;
+    ldm:file [
+      ldm:mediaType "application/rdf+xml"
+    ]
+  ] .
+
+
+
+# Wijk- en buurtkaart
+
+data:wijk-en-buurt-kaart a ldm:Dataset ;
+  ldm:distribution dist:wijk-en-buurt-kaart ;
+  dct:publisher org:cbs ;
+  dct:subject
+    topic:geography ,
+    topic:netherlands ,
+    topic:statistics ;
+  rdfs:label "Wijk- en Buurtkaart"@nl .
+
+dist:wijk-en-buurt-kaart a ldm:Distribution ;
+  ldm:file [
+    ldm:downloadLocation "https://krr.triply.cc/Kadaster/cbs/download.trig.gz"^^xsd:anyURI ;
+    ldm:mediaType "application/gzip" ;
+    ldm:file [
+      ldm:mediaType "application/trig"
+    ]
+  ] .

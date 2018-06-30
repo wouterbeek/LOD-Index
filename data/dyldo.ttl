@@ -1,27 +1,26 @@
-prefix dcat: <http://www.w3.org/ns/dcat#>
 prefix foaf: <http://xmlns.com/foaf/0.1/>
+prefix ldm: <https://ldm.cc/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 
 prefix data: <https://index.lodlaundromat.org/dataset/>
 prefix dist: <https://index.lodlaundromat.org/distribution/>
 
-# Catalog
+<https://index.lodlaundromat.org> a ldm:Catalog ;
+  ldm:dataset data:dyldo .
 
-<https://index.lodlaundromat.org> a dcat:Catalog ;
-  dcat:dataset data:dyldo .
-
-# Datasets
-
-data:dyldo a dcat:Dataset ;
-  dcat:distribution dist:dyldo ;
+data:dyldo a ldm:Dataset ;
   foaf:homepage "http://km.aifb.kit.edu/projects/dyldo/"^^xsd:anyURI ;
+  ldm:distribution dist:dyldo ;
   rdfs:label "Dynamic Linked Data Observatory (Dyldo)"@en .
 
-# Distributions
-
-dist:dyldo a dcat:Distribution ;
-  dcat:downloadURL
-    "http://km.aifb.kit.edu/projects/dyldo/data/2018-04-15/data-seedlist.nq.gz"^^xsd:anyURI ,
-    "http://km.aifb.kit.edu/projects/dyldo/data/2018-04-15/data.nq.gz"^^xsd:anyURI ,
-    "http://km.aifb.kit.edu/projects/dyldo/data/2018-04-15/headers.nq.gz"^^xsd:anyURI .
+dist:dyldo a ldm:Distribution ;
+  ldm:file [
+    ldm:downloadLocation "http://km.aifb.kit.edu/projects/dyldo/data/2018-04-15/data-seedlist.nq.gz"^^xsd:anyURI
+  ] ;
+  ldm:file [
+    ldm:downloadLocation "http://km.aifb.kit.edu/projects/dyldo/data/2018-04-15/data.nq.gz"^^xsd:anyURI
+  ] ;
+  ldm:file [
+    "http://km.aifb.kit.edu/projects/dyldo/data/2018-04-15/headers.nq.gz"^^xsd:anyURI
+  ] .
