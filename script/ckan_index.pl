@@ -18,7 +18,9 @@ Generates LOD Index descriptions for CKAN sites.
 :- use_module(library(http/ckan_api)).
 :- use_module(library(http/ckan_export)).
 :- use_module(library(http/http_client2)).
+:- use_module(library(image)).
 :- use_module(library(json_ext)).
+:- use_module(library(media_type)).
 :- use_module(library(pp)).
 :- use_module(library(sw/rdf_mem)).
 :- use_module(library(sw/rdf_prefix)).
@@ -52,7 +54,7 @@ run(Uri) :-
   ckan_uri_name(Uri, Name),
   directory_file_path(TmpDir0, Name, TmpDir),
   % Assert datasets and organizations in RDF.
-  ckan_export(Uri, TmpDir),
+  %ckan_export(Uri, TmpDir),
   open_json(TmpDir, organization, OrgDicts),
   maplist(assert_organization(ImgDir), OrgDicts),
   open_json(TmpDir, package, DatasetDicts),
@@ -61,7 +63,7 @@ run(Uri) :-
   absolute_file_name(
     Name,
     File,
-    [access(write),extensions(['nt.gz']),relative_to(DataDir)]
+    [access(write),extensions([nt]),relative_to(DataDir)]
   ),
   rdf_save(File).
 
@@ -113,8 +115,8 @@ assert_distribution(Distribution, ResourceDict) :-
   ;   true
   ).
 
-assert_organization(Dir, OrgDict) :-
-  _{description: Description, image_url: ImageUri1, name: Local, title: Name} :< OrgDict,
+assert_organization(ImgDir, OrgDict) :-
+  _{description: Description, image_url: ImageUri, name: Local, title: Name} :< OrgDict,
   rdf_global_id(org:Local, Org),
   rdf_assert_triple(Org, rdf:type, foaf:'Org'),
   (   Description \== ''
@@ -122,28 +124,49 @@ assert_organization(Dir, OrgDict) :-
   ;   true
   ),
   rdf_assert_triple(Org, dct:title, str(Name)),
-  image_uri_file(Local, ImageUri1, ImageFile),
-  directory_file_path(Dir, ImageFile, ImagePath),
-  (   is_uri(ImageUri1)
-  ->  http_download(ImageUri1, ImagePath),
-      triply_image_uri(wouter, index, ImageFile, ImageUri2),
-      rdf_assert_triple(Org, foaf:depiction, uri(ImageUri2))
-  ;   true
-  ),
+  assert_organization_image(ImgDir, Org, Local, ImageUri),
   rdf_assert_triple(Org, rdfs:label, str(Name)).
 
-image_uri_file(Local, Uri, File) :-
-  member(Ext, [gif,jpeg,jpg,png]),
-  sub_atom_icasechk(Uri, _, Ext), !,
-  file_name_extension(Local, Ext, File).
-image_uri_file(Local, _, Local).
+assert_organization_image(ImgDir, Org, Local, Uri) :-
+  directory_file_path(ImgDir, Local, Path),
+  (   is_uri(Uri)
+  ->  http_download(Uri, Path),
+      catch(image_format(Path, Format), E, true),
+      (   var(E)
+      ->  downcase_atom(Format, Extension),
+          (   media_type_extension(_MediaType, Extension)
+          ->  update_image_file_name(Path, Extension),
+              file_name_extension(Local, Extension, AssetName),
+              triply_image_uri(wouter, index, AssetName, AssetUri),
+              rdf_assert_triple(Org, foaf:depiction, uri(AssetUri))
+          ;   print_message(warning, unrecognized_image_format(Format)),
+              delete_file(Path)
+          )
+      ;   print_message(warning, not_an_image(Path)),
+          delete_file(Path)
+      )
+  ;   true
+  ).
+
+update_image_file_name(Path1, Extension) :-
+  file_extensions(Path1, Extensions),
+  (   Extensions == [Extension]
+  ->  true
+  ;   (   Extensions == [jpg],
+          Extension == jpeg
+      ->  change_file_name_extension(Path1, jpg, jpeg, Path2)
+      ;   file_name_extension(Path1, Extension, Path2)
+      ),
+      rename_file(Path1, Path2)
+  ).
 
 license_uri('cc-by', 'https://creativecommons.org/licenses/by/4.0/').
 license_uri('cc-by-sa', 'https://creativecommons.org/licenses/by-sa/4.0/').
 license_uri('cc-nc', 'https://creativecommons.org/licenses/by-nc/4.0/').
 license_uri('cc-zero', 'https://creativecommons.org/publicdomain/zero/1.0/').
 
-triply_image_uri(User, Dataset, File, Uri) :-
+triply_image_uri(User, Dataset, Path, Uri) :-
+  file_base_name(Path, File),
   uri_comps(
     Uri,
     uri(

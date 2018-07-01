@@ -1,2 +1,2 @@
 #!/bin/sh
-swipl -q lod_index.pl --conf=conf.json
+swipl -q lod_index.pl -g upload(index) --conf=conf.json

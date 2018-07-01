@@ -68,7 +68,7 @@ reset_seeds :-
 
 
 
-%! upload(+User:oneof(['lod-cloud','lod-laundromat'])) is det.
+%! upload(+User:atom) is det.
 %
 % Upload the LOD Index of User to LOD Seedlist.
 
@@ -79,7 +79,7 @@ upload(User) :-
   ).
 
 uri_(User, Uri) :-
-  statement(ll, User, index, _, dcat:downloadURL, Uri0, _),
+  statement(ll, User, index, _, ldm:downloadLocation, Uri0, _),
   rdf_literal_value(Uri0, Uri).
 
 
