@@ -1,5 +1,5 @@
 :- module(
-  lod_seedlist_api,
+  seedlist_api,
   [
     assert_seed/1,  % +Uri
     assert_seeds/1, % +Uris
@@ -27,15 +27,18 @@
 :- use_module(library(sw/rdf_term)).
 :- use_module(library(uri_ext)).
 
+:- initialization
+   init_seedlist_api.
+
 :- meta_predicate
     seedlist_request_(+, +, 1, +).
 
-:- setting(authority, any, _,
+:- setting(seedlist:authority, any, _,
            "URI scheme of the LOD Seedlist server location.").
-:- setting(password, any, _, "").
-:- setting(scheme, oneof([http,https]), https,
+:- setting(seedlist:password, any, _, "").
+:- setting(seedlist:scheme, oneof([http,https]), https,
            "URI scheme of the LOD Seedlist server location.").
-:- setting(user, any, _, "").
+:- setting(seedlist:user, any, _, "").
 
 
 
@@ -106,7 +109,7 @@ seed_(Seed, In) :-
 seedlist_request_(Segments, Query, Goal_1, Options) :-
   maplist(
     setting,
-    [authority,password,scheme,user],
+    [seedlist:authority,seedlist:password,seedlist:scheme,seedlist:user],
     [Auth,Password,Scheme,User]
   ),
   uri_comps(Uri, uri(Scheme,Auth,Segments,Query,_)),
@@ -114,4 +117,25 @@ seedlist_request_(Segments, Query, Goal_1, Options) :-
     Uri,
     Goal_1,
     [accept(json),authorization(basic(User,Password))|Options]
+  ).
+
+
+
+
+
+% INITIALIZATION %
+
+%! init_seedlist_api is det.
+
+init_seedlist_api :-
+  conf_json(Conf),
+  maplist(
+    set_setting,
+    [seedlist:authority,seedlist:password,seedlist:scheme,seedlist:user],
+    [
+      Conf.seedlist.authority,
+      Conf.seedlist.password,
+      Conf.seedlist.scheme,
+      Conf.seedlist.user
+    ]
   ).

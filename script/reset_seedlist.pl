@@ -1,8 +1,15 @@
-%! reset_seeds is det.
-%
-% Reset all seeds in LOD Seedlist.
+/* Reset LOD Seedlist
 
-reset_seeds :-
+@author Wouter Beek
+@version 2018
+*/
+
+:- use_module(library(lists)).
+:- use_module(library(ll/seedlist_api)).
+
+
+
+run :-
   forall(
     (
       member(Status, [idle,processing]),
