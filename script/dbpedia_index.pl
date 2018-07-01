@@ -1,6 +1,4 @@
-:- module(dbpedia_index, [run/0]).
-
-/** <module> DBpedia → LOD Index
+/* DBpedia → LOD Index
 
 @author Wouter Beek
 @version 2018
@@ -10,6 +8,7 @@
 
 :- use_module(library(dict)).
 :- use_module(library(html/html_index)).
+:- use_module(library(json_ext)).
 :- use_module(library(uri_ext)).
 
 run :-
@@ -22,11 +21,7 @@ run :-
     Pairs
   ),
   dict_pairs(Dict, Pairs),
-  setup_call_cleanup(
-    open('dbpedia.json', write, Out),
-    json_write_dict(Out, _{set: Dict}),
-    close(Out)
-  ).
+  json_save('dbpedia.json', _{set: Dict}).
 
 dbpedia_version_pair(Version, Pair) :-
   atomic_list_concat([dbpedia,Version], -, DName),

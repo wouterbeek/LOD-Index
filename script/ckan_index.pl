@@ -1,6 +1,4 @@
-:- module(ckan_index, [run/0,run/1]).
-
-/** <module> CKAN Index
+/* CKAN Index
 
 Generates LOD Index descriptions for CKAN sites.
 
@@ -187,4 +185,4 @@ triply_image_uri(User, Dataset, Path, Uri) :-
 open_json(Dir, Base, Dicts) :-
   file_name_extension(Base, 'json.gz', Local),
   directory_file_path(Dir, Local, File),
-  json_open(File, Dicts).
+  json_load(File, Dicts).
