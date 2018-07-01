@@ -1,26 +1,29 @@
 :- module(ckan_index, [run/0,run/1]).
 
+/** <module> CKAN Index
+
+Generates LOD Index descriptions for CKAN sites.
+
+@author Wouter Beek
+@version 2018
+*/
+
 :- use_module(library(aggregate)).
 :- use_module(library(apply)).
 :- use_module(library(http/json)).
-:- use_module(library(settings)).
 :- use_module(library(zlib)).
 
-:- use_module(library(conf_ext)).
 :- use_module(library(dict)).
 :- use_module(library(file_ext)).
 :- use_module(library(http/ckan_api)).
 :- use_module(library(http/ckan_export)).
 :- use_module(library(http/http_client2)).
+:- use_module(library(json_ext)).
 :- use_module(library(pp)).
 :- use_module(library(sw/rdf_mem)).
 :- use_module(library(sw/rdf_prefix)).
 :- use_module(library(sw/rdf_term)).
-:- use_module(library(tapir/tapir_api)).
 :- use_module(library(uri_ext)).
-
-:- initialization
-   init_ckan_index.
 
 :- maplist(rdf_assert_prefix, [
      data-'https://index.lodlaundromat.org/dataset/',
@@ -36,30 +39,31 @@
      xsd-'http://www.w3.org/2001/XMLSchema#'
    ]).
 
-:- setting(data_directory, any, _, "").
-
 
 
 run :-
   run('https://opendata.oorlogsbronnen.nl/').
 
 run(Uri) :-
-  setting(data_directory, Dir1),
-  ckan_uri_directory(Dir1, Uri, Dir2),
-  create_directory(Dir2),
-  %ckan_export(Uri, Dir2),
-  directory_file_path(Dir2, img, Dir3),
-  create_directory(Dir3),
-  open_json(Dir2, organization, OrgDicts),
-  maplist(assert_organization(Dir3), OrgDicts),
-  open_json(Dir2, package, DatasetDicts),
+  % Determine the various directory names.
+  working_directory(Dir0),
+  directory_parent(Dir0, Dir),
+  maplist(directory_file_path(Dir), [data,img,tmp], [DataDir,ImgDir,TmpDir0]),
+  ckan_uri_name(Uri, Name),
+  directory_file_path(TmpDir0, Name, TmpDir),
+  % Assert datasets and organizations in RDF.
+  ckan_export(Uri, TmpDir),
+  open_json(TmpDir, organization, OrgDicts),
+  maplist(assert_organization(ImgDir), OrgDicts),
+  open_json(TmpDir, package, DatasetDicts),
   maplist(assert_dataset, DatasetDicts),
-  %aggregate_all(set(Image), directory_path(Dir3, Image), Images),
-  directory_file_path(Dir2, 'index.nt.gz', File),
-  rdf_save(File),
-  %uri_hash(Uri, Hash),
-  %dataset_upload(Hash, _{accessLevel: public, assets: Images, files: ['index.nt.gz']}),
-  true.
+  % Save RDF to file.
+  absolute_file_name(
+    Name,
+    File,
+    [access(write),extensions(['nt.gz']),relative_to(DataDir)]
+  ),
+  rdf_save(File).
 
 assert_dataset(DatasetDict) :-
   _{
@@ -153,23 +157,11 @@ triply_image_uri(User, Dataset, File, Uri) :-
 
 
 
-% INITIALIZATION %
-
-init_ckan_index :-
-  conf_json(Conf),
-  directory_file_path(Conf.'data-directory', 'LOD-Index', Dir),
-  create_directory(Dir),
-  set_setting(data_directory, Dir).
-
-
-
 % HELPERS %
+
+%! open_json(+Directory:atom, +Base:atom, -Dicts:list(dict)) is det.
 
 open_json(Dir, Base, Dicts) :-
   file_name_extension(Base, 'json.gz', Local),
   directory_file_path(Dir, Local, File),
-  setup_call_cleanup(
-    gzopen(File, read, In),
-    json_read_dict(In, Dicts, [value_string_as(atom)]),
-    close(In)
-  ).
+  json_open(File, Dicts).
