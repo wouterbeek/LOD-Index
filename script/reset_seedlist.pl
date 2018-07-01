@@ -9,7 +9,15 @@
 
 
 
-run :-
+clear :-
+  forall(
+    seed(Seed),
+    retract_seed(Seed)
+  ).
+
+
+
+reset :-
   forall(
     (
       member(Status, [idle,processing]),
