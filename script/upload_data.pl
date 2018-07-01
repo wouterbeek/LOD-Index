@@ -1,15 +1,21 @@
-:- module(lod_laundromat_index, [run/0]).
+/* Upload to LOD Index
 
-/** <module> LOD Laundromat → LOD Index
+Uploads the data files in `/data' and the asset files in `/img' to the
+LOD Index.
 
 @author Wouter Beek
 @version 2018
 */
 
+:- use_module(library(apply)).
+
+:- use_module(library(image)).
 :- use_module(library(tapir/tapir_api)).
 
 run :-
-  expand_file_name('../data/*.ttl', Files),
+  expand_file_name('../img/*', ImageFiles0),
+  include(is_image, ImageFiles0, ImageFiles),
+  expand_file_name('../data/*.ttl', DataFiles),
   Prefixes = [
     data-'https://index.lodlaundromat.org/dataset/',
     dcat-'http://www.w3.org/ns/dcat#',
@@ -24,4 +30,7 @@ run :-
     void-'http://rdfs.org/ns/void#',
     xsd-'http://www.w3.org/2001/XMLSchema#'
   ],
-  dataset_upload(ll, 'lod-laundromat', index, _{files: Files, prefixes: Prefixes}).
+  dataset_upload(
+    index,
+    _{assets: ImageFiles, files: DataFiles, prefixes: Prefixes}
+  ).

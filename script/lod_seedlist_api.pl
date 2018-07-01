@@ -1,16 +1,15 @@
 :- module(
-  lod_index,
+  lod_seedlist_api,
   [
-    reset_seeds/0,
-    upload/1       % +User
+    assert_seed/1,  % +Uri
+    assert_seeds/1, % +Uris
+    retract_seed/1, % +Seed
+    seed/1,         % -Seed
+    seed_by_type/2  % +Type, -Seed
   ]
 ).
 
-/** <module> LOD Index script
-
-Simple scripts for interacting with the LOD Index.
-
----
+/** <module> LOD Seedlist API
 
 @author Wouter Beek
 @version 2018
@@ -26,16 +25,10 @@ Simple scripts for interacting with the LOD Index.
 :- use_module(library(http/http_client2)).
 :- use_module(library(sw/rdf_prefix)).
 :- use_module(library(sw/rdf_term)).
-:- use_module(library(tapir/tapir_api)).
 :- use_module(library(uri_ext)).
-
-:- initialization
-   init_seedlist_client.
 
 :- meta_predicate
     seedlist_request_(+, +, 1, +).
-
-:- rdf_assert_prefix(dcat, 'http://www.w3.org/ns/dcat#').
 
 :- setting(authority, any, _,
            "URI scheme of the LOD Seedlist server location.").
@@ -47,46 +40,6 @@ Simple scripts for interacting with the LOD Index.
 
 
 
-
-% SCRIPT %
-
-%! reset_seeds is det.
-%
-% Reset all seeds in LOD Seedlist.
-
-reset_seeds :-
-  forall(
-    (
-      member(Status, [idle,processing]),
-      seed_by_type(Status, Seed)
-    ),
-    (
-      retract_seed(Seed),
-      assert_seed(Seed.url)
-    )
-  ).
-
-
-
-%! upload(+User:atom) is det.
-%
-% Upload the LOD Index of User to LOD Seedlist.
-
-upload(User) :-
-  forall(
-    findnsols(1 000, Uri, uri_(User, Uri), Uris),
-    assert_seeds(Uris)
-  ).
-
-uri_(User, Uri) :-
-  statement(ll, User, index, _, ldm:downloadLocation, Uri0, _),
-  rdf_literal_value(Uri0, Uri).
-
-
-
-
-
-% API %
 
 %! assert_seed(+Uri:atom) is det.
 
@@ -161,25 +114,4 @@ seedlist_request_(Segments, Query, Goal_1, Options) :-
     Uri,
     Goal_1,
     [accept(json),authorization(basic(User,Password))|Options]
-  ).
-
-
-
-
-
-% INITIALIZATION %
-
-%! init_seedlist_client is det.
-
-init_seedlist_client :-
-  conf_json(Conf),
-  maplist(
-    set_setting,
-    [authority,password,scheme,user],
-    [
-      Conf.seedlist.authority,
-      Conf.seedlist.password,
-      Conf.seedlist.scheme,
-      Conf.seedlist.user
-    ]
   ).

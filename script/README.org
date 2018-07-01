@@ -4,39 +4,27 @@
 This directory contains scripts for updating and using the online LOD
 Index.
 
-* ~ckan_index.pl~
+* DONE ~ckan_index.pl~
 
 Generates the LOD Index description for a give CKAN site.
 
-* ~dbpedia_index.pl~
+* TODO ~dbpedia_index.pl~
 
 Generates the LOD Index description for versions of the DBpedia
 dataset.
 
-* ~lod_cloud_index.pl~
+* TODO ~lod_cloud_index.pl~
 
 Generates the LOD Index description for the LOD Cloud picture.
 
-* ~upload_index.pl~
+* DONE ~populate_seedlist.pl~
 
-Uploads local data files to LOD Index.
+Populates LOD Seedlist with URIs from LOD Index.
 
-* Upload the index.
+* TODO ~reset_seedlist.pl~
 
-Script ~upload-index.sh~ collects the data description files from
-~/data~ and uploads them to
-https://data.lodlaundromat.org/wouter/index.
+Sets all processed and processing seeds to stale.
 
-* 
+* TODO ~upload_data.pl~
 
-Script ~upload-seeds.sh~ queries for document URLs from
-https://data.lodlaundromat.org/wouter/index, and adds them to the
-LOD-Seedlist service.
-
-* ~upload_datasets.sh~
-
-Script ~upload-datasets.sh~ queries for datasets from
-https://data.lodlaundromat.org/wouter/index and checks whether their
-corresponding documents have already been cleaned by the
-LOD-Laundromat.  If so, the dataset is uploaded to
-https://data.lodlaundromat.org.
+Uploads local data files to LOD Laundromat.
