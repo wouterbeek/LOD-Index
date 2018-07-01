@@ -13,6 +13,7 @@ Uploads the index for the LOD Cloud picture.
 :- use_module(library(settings)).
 :- use_module(library(zlib)).
 
+:- use_module(library(json_ext)).
 :- use_module(library(sw/rdf_export)).
 :- use_module(library(sw/rdf_mem)).
 :- use_module(library(sw/rdf_prefix)).
@@ -43,11 +44,7 @@ run :-
   run('../data/2018-lod-cloud.json.gz').
 
 run(File) :-
-  setup_call_cleanup(
-    gzopen(File, read, In),
-    json_read_dict(In, Dict, [value_string_as(atom)]),
-    close(In)
-  ),
+  open_json(File, Dict),
   forall(
     get_dict(Local, Dict, Dict0),
     assert_dataset(Local, Dict0)
