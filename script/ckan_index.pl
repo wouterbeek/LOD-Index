@@ -20,9 +20,9 @@ Generates LOD Index descriptions for CKAN sites.
 :- use_module(library(json_ext)).
 :- use_module(library(media_type)).
 :- use_module(library(pp)).
-:- use_module(library(sw/rdf_mem)).
-:- use_module(library(sw/rdf_prefix)).
-:- use_module(library(sw/rdf_term)).
+:- use_module(library(semweb/rdf_mem)).
+:- use_module(library(semweb/rdf_prefix)).
+:- use_module(library(semweb/rdf_term)).
 :- use_module(library(uri_ext)).
 
 :- maplist(rdf_assert_prefix, [

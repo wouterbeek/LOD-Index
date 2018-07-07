@@ -15,8 +15,8 @@
 :- use_module(library(apply)).
 :- use_module(library(settings)).
 
-:- use_module(library(sw/rdf_prefix)).
-:- use_module(library(sw/rdf_term)).
+:- use_module(library(semweb/rdf_prefix)).
+:- use_module(library(semweb/rdf_term)).
 :- use_module(library(tapir/tapir_api)).
 
 :- maplist(rdf_assert_prefix, [

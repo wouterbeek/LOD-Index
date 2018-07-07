@@ -12,10 +12,10 @@ Uploads the index for the LOD Cloud picture.
 :- use_module(library(zlib)).
 
 :- use_module(library(json_ext)).
-:- use_module(library(sw/rdf_export)).
-:- use_module(library(sw/rdf_mem)).
-:- use_module(library(sw/rdf_prefix)).
-:- use_module(library(sw/rdf_term)).
+:- use_module(library(semweb/rdf_export)).
+:- use_module(library(semweb/rdf_mem)).
+:- use_module(library(semweb/rdf_prefix)).
+:- use_module(library(semweb/rdf_term)).
 
 :- maplist(rdf_assert_prefix, [
      data-'https://index.lodlaundromat.org/dataset/',
