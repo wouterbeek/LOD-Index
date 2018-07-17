@@ -13,15 +13,14 @@
 */
 
 :- use_module(library(apply)).
-:- use_module(library(settings)).
 
 :- use_module(library(semweb/rdf_prefix)).
 :- use_module(library(semweb/rdf_term)).
 :- use_module(library(tapir/tapir_api)).
 
-:- maplist(rdf_assert_prefix, [
+:- maplist(rdf_register_prefix, [
      ldm-'https://ldm.cc/',
-     rdf-'http://www.w3.org/1999/02/22-rdf-syntax-ns#'
+     rdf
    ]).
 
 :- rdf_meta

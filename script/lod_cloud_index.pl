@@ -17,18 +17,18 @@ Uploads the index for the LOD Cloud picture.
 :- use_module(library(semweb/rdf_prefix)).
 :- use_module(library(semweb/rdf_term)).
 
-:- maplist(rdf_assert_prefix, [
+:- maplist(rdf_register_prefix, [
      data-'https://index.lodlaundromat.org/dataset/',
-    dct-'http://purl.org/dc/terms/',
+     dct,
      dist-'https://index.lodlaundromat.org/distribution/',
-     foaf-'http://xmlns.com/foaf/0.1/',
+     foaf,
      graph-'https://lodlaundromat.org/graph/',
      ldm-'https://ldm.cc/',
      org-'https://index.lodlaundromat.org/organization/',
-     rdf-'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
-     rdfs-'http://www.w3.org/2000/01/rdf-schema#',
+     rdf,
+     rdfs,
      topic-'https://index.lodlaundromat.org/topic/',
-     xsd-'http://www.w3.org/2001/XMLSchema#'
+     xsd
    ]).
 
 :- initialization

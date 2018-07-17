@@ -5,20 +5,26 @@ This directory contains scripts for updating and using the online LOD
 Index.
 
 * DONE ~ckan_index.pl~
+
 Generates the LOD Index description for a give CKAN site.
 
 * TODO ~dbpedia_index.pl~
+
 Generates the LOD Index description for versions of the DBpedia
 dataset.
 
 * TODO ~lod_cloud_index.pl~
+
 Generates the LOD Index description for the LOD Cloud picture.
 
 * DONE ~populate_seedlist.pl~
+
 Populates LOD Seedlist with URIs from LOD Index.
 
 * TODO ~reset_seedlist.pl~
+
 Sets all processed and processing seeds to stale.
 
 * TODO ~upload_data.pl~
+
 Uploads local data files to LOD Laundromat.

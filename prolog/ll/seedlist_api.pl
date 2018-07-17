@@ -128,7 +128,7 @@ seedlist_request_(Segments, Query, Goal_1, Options) :-
 %! init_seedlist_api is det.
 
 init_seedlist_api :-
-  conf_json(Conf),
+  conf_json(Conf), !,
   maplist(
     set_setting,
     [seedlist:authority,seedlist:password,seedlist:scheme,seedlist:user],
@@ -139,3 +139,4 @@ init_seedlist_api :-
       Conf.seedlist.user
     ]
   ).
+init_seedlist_api.
