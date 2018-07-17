@@ -19,6 +19,7 @@ prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 #+BEGIN_SRC ttl
 prefix data: <https://index.lodlaundromat.org/dataset/>
 prefix dist: <https://index.lodlaundromat.org/distribution/>
+prefix ldm: <https://ldm.cc/>
 prefix org: <https://index.lodlaundromat.org/organization/>
 prefix topic: <https://index.lodlaundromat.org/topic/>
 #+END_SRC
@@ -30,32 +31,32 @@ A dataset descriptions consists of the following assertions.
 ** Catalog assertions
 
 #+BEGIN_SRC ttl
-<https://index.lodlaundromar.org> a dcat:Catalog ;
-  dcat:dataset data:LOCAL .
+<https://index.lodlaundromar.org> a ldm:Catalog;
+  ldm:dataset data:LOCAL.
 #+END_SRC
 
 ** Dataset assertions
 
 #+BEGIN_SRC ttl
-data:LOCAL a dcat:Dataset ;
-  dcat:distribution dist:LOCAL ;
-  dcat:theme topic:LOCAL ;
-  dct:publisher org:LOCAL ;
-  rdfs:label "LABEL"@en .
+data:LOCAL a ldm:Dataset;
+  ldm:distribution dist:LOCAL;
+  ldm:theme topic:LOCAL;
+  dct:publisher org:LOCAL;
+  rdfs:label "LABEL"@en.
 #+END_SRC
 
 ** Distribution assertions
 
 #+BEGIN_SRC ttl
-dist:LOCAL a dcat:Distribution ;
-  dcat:downloadURL "URL"^^xsd:anyURI ;
-  dcat:mediaType "MEDIA-TYPE" .
+dist:LOCAL a ldm:Distribution;
+  ldm:downloadURL "URL"^^xsd:anyURI;
+  ldm:mediaType "MEDIA-TYPE".
 #+END_SRC
 
 ** Organization assertions
 
 #+BEGIN_SRC ttl
-org:LOCAL a foaf:Organization ;
-  foaf:homepage "URL"^^xsd:anyURI ;
-  rdfs:label "LABEL"@en .
+org:LOCAL a foaf:Organization;
+  foaf:homepage "URL"^^xsd:anyURI;
+  rdfs:label "LABEL"@en.
 #+END_SRC
