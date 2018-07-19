@@ -48,8 +48,8 @@ run(File) :-
 
 assert_dataset(Local, Dict) :-
   rdf_equal(graph:index, G),
-  rdf_global_id(data:Local, S),
-  rdf_global_id(topic:Dict.domain, Topic),
+  rdf_prefix_iri(data:Local, S),
+  rdf_prefix_iri(topic:Dict.domain, Topic),
   rdf_assert_triple(S, rdf:type, ldm:'Dataset', G),
   forall(
     get_dict(LTag, Dict.description, Lex),

@@ -76,7 +76,7 @@ assert_dataset(DatasetDict) :-
     url: Uri
   } :< DatasetDict,
   _{name: OrgLocal} :< OrgDict,
-  rdf_global_id(data:DatasetLocal, Dataset),
+  rdf_prefix_iri(data:DatasetLocal, Dataset),
   rdf_assert_triple('https://index.lodlaundromat.org', ldm:dataset, Dataset),
   rdf_assert_triple(Dataset, rdf:type, ldm:'Dataset'),
   (   Description \== ''
@@ -84,7 +84,7 @@ assert_dataset(DatasetDict) :-
   ;   true
   ),
   license_uri(LicenseId, License),
-  rdf_global_id(org:OrgLocal, Org),
+  rdf_prefix_iri(org:OrgLocal, Org),
   rdf_assert_triple(Dataset, dct:creator, Org),
   rdf_assert_triple(Dataset, dct:license, License),
   rdf_assert_triple(Dataset, dct:title, str(Title)),
@@ -93,7 +93,7 @@ assert_dataset(DatasetDict) :-
   ;   true
   ),
   rdf_assert_triple(Dataset, rdfs:label, str(Title)),
-  rdf_global_id(dist:DatasetLocal, Distribution),
+  rdf_prefix_iri(dist:DatasetLocal, Distribution),
   rdf_assert_triple(Distribution, rdf:type, ldm:'Distribution'),
   rdf_assert_triple(Dataset, ldm:distribution, Distribution),
   maplist(assert_distribution(Distribution), ResourceDicts).
@@ -101,7 +101,7 @@ assert_dataset(DatasetDict) :-
 assert_distribution(Distribution, ResourceDict) :-
   _{description: Description, id: Local, name: Name, url: Uri} :< ResourceDict,
   (   Uri \== ''
-  ->  rdf_global_id(file:Local, File),
+  ->  rdf_prefix_iri(file:Local, File),
       rdf_assert_triple(Distribution, ldm:file, File),
       rdf_assert_triple(File, ldm:downloadLocation, uri(Uri)),
       (   Description \== ''
@@ -115,7 +115,7 @@ assert_distribution(Distribution, ResourceDict) :-
 
 assert_organization(ImgDir, OrgDict) :-
   _{description: Description, image_url: ImageUri, name: Local, title: Name} :< OrgDict,
-  rdf_global_id(org:Local, Org),
+  rdf_prefix_iri(org:Local, Org),
   rdf_assert_triple(Org, rdf:type, foaf:'Org'),
   (   Description \== ''
   ->  rdf_assert_triple(Org, dct:description, str(Description))
