@@ -14,6 +14,7 @@ Generated LOD Index descriptions for LOD Cloud files.
 :- use_module(library(semweb/rdf_mem)).
 :- use_module(library(semweb/rdf_prefix)).
 :- use_module(library(semweb/rdf_term)).
+:- use_module(library(uri_ext)).
 
 :- maplist(rdf_register_prefix, [
      data-'https://index.lodlaundromat.org/dataset/',
@@ -66,13 +67,13 @@ assert_dataset(Key, Dict) :-
   get_dict(triples, Dict, Triples),
   (atom(Triples) -> Lex = Triples ; atom_number(Lex, Triples)),
   rdf_assert_triple(Dataset, ldm:triples, str(Lex)),
-  (   get_dict(namespace, Dict, Namespace)
-  ->  rdf_assert_triple(Dataset, ldm:namespace, uri(Namespace))
-  ;   true
-  ),
+  %(   get_dict(namespace, Dict, Namespace)
+  %->  rdf_assert_triple(Dataset, ldm:namespace, uri(Namespace))
+  %;   true
+  %),
   maplist(assert_distribution(Dataset, access_url), Dict.other_download),
-  maplist(assert_distribution(Dataset, download_url), Dict.full_download),
-  maplist(assert_endpoint(Dataset), Dict.sparql).
+  maplist(assert_distribution(Dataset, download_url), Dict.full_download).
+  %maplist(assert_endpoint(Dataset), Dict.sparql).
 
 assert_distribution(Dataset, Key, Dict) :-
   rdf_bnode_iri(Distribution),
@@ -83,7 +84,12 @@ assert_distribution(Dataset, Key, Dict) :-
   ;   true
   ),
   get_dict(Key, Dict, Url),
-  rdf_assert_triple(Distribution, ldm:downloadLocation, uri(Url)),
+  % Skip syntactically malformed download URIs.
+  (   catch(is_iri(Url), E, print_message(error,E)),
+      var(E)
+  ->  rdf_assert_triple(Distribution, ldm:downloadLocation, uri(Url))
+  ;   true
+  ),
   (   get_dict(media_type, Dict, Lex2)
   ->  rdf_assert_triple(Distribution, ldm:mediaType, str(Lex2))
   ;   true
@@ -93,7 +99,7 @@ assert_distribution(Dataset, Key, Dict) :-
   ;   true
   ).
 
-assert_endpoint(Dataset, Dict) :-
-  get_dict(access_url, Dict, Url), !,
-  rdf_assert_triple(Dataset, ldm:sparqlEndpoint, uri(Url)).
-assert_endpoint(_, _).
+%assert_endpoint(Dataset, Dict) :-
+%  get_dict(access_url, Dict, Url), !,
+%  rdf_assert_triple(Dataset, ldm:sparqlEndpoint, uri(Url)).
+%assert_endpoint(_, _).
