@@ -7,12 +7,10 @@ Generated LOD Index descriptions for LOD Cloud files.
 */
 
 :- use_module(library(apply)).
-:- use_module(library(http/json)).
 :- use_module(library(settings)).
-:- use_module(library(zlib)).
 
+:- use_module(library(file_ext)).
 :- use_module(library(json_ext)).
-:- use_module(library(semweb/rdf_export)).
 :- use_module(library(semweb/rdf_mem)).
 :- use_module(library(semweb/rdf_prefix)).
 :- use_module(library(semweb/rdf_term)).
@@ -39,15 +37,18 @@ run :-
   run('/home/wbeek/data/LOD-Cloud/2018-07-08.json.gz').
 
 run(File) :-
+  file_base_name(File, Local1),
+  file_name_extensions(Local1, Name, [json,gz]),
+  file_name_extensions(Local2, Name, [ttl]),
   json_load(File, Struct),
   forall(
-    get_dict(Local, Struct, Dict),
-    assert_dataset(Local, Dict)
+    get_dict(Key, Struct, Dict),
+    assert_dataset(Key, Dict)
   ),
-  rdf_save('lod-cloud.nt.gz').
+  rdf_save(Local2).
 
-assert_dataset(Local, Dict) :-
-  rdf_prefix_iri(data:Local, Dataset),
+assert_dataset(Key, Dict) :-
+  rdf_prefix_iri(data:Key, Dataset),
   rdf_assert_triple(Dataset, rdf:type, ldm:'Dataset'),
   forall(
     get_dict(LTag, Dict.description, Lex),
