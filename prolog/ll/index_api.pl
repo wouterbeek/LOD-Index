@@ -1,8 +1,9 @@
 :- module(
   index_api,
   [
-    dataset/1,          % -Dataset
-    download_location/1 % -Uri
+    index_dataset/1,           % -Dataset
+    index_download_location/1, % -Uri
+    index_statement/3          % ?S, ?P, ?O
   ]
 ).
 
@@ -24,31 +25,29 @@
    ]).
 
 :- rdf_meta
-   statement_(r, r, o).
+   index_statement(r, r, o).
 
 
 
 
 
-%! dataset(-Dataset:iri) is nondet.
+%! index_dataset(-Dataset:iri) is nondet.
 
-dataset(Dataset) :-
-  statement_(Dataset, rdf:type, ldm:'Dataset').
+index_dataset(Dataset) :-
+  index_statement(Dataset, rdf:type, ldm:'Dataset').
 
 
 
-%! download_location(-Uri:atom) is nondet.
+%! index_download_location(-Uri:atom) is nondet.
 
-download_location(Uri) :-
-  statement_(_, ldm:downloadLocation, Uri0),
+index_download_location(Uri) :-
+  index_statement(_, ldm:downloadLocation, Uri0),
   rdf_literal_value(Uri0, Uri).
 
 
 
+%! index_statement(?S:rdf_nonliteral, ?P:iri, ?O:rdf_term) is nondet.
 
-
-% HELPERS %
-
-statement_(S, P, O) :-
+index_statement(S, P, O) :-
   current_user(User),
-  statement(User, index, S, P, O).
+  statement(_, User, index, S, P, O).

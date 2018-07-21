@@ -12,5 +12,5 @@
 
 
 run :-
-  aggregate_all(set(Uri), download_location(Uri), Uris),
+  aggregate_all(set(Uri), index_download_location(Uri), Uris),
   assert_seeds(Uris).
