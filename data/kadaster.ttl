@@ -1,4 +1,4 @@
-prefix dct: <http://purl.org/dc/terms/>
+prefix dcterm: <http://purl.org/dc/terms/>
 prefix foaf: <http://xmlns.com/foaf/0.1/>
 prefix ldm: <https://ldm.cc/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -25,8 +25,8 @@ org:kadaster a foaf:Organization ;
 # BAG
 
 data:bag a ldm:Dataset ;
-  dct:publisher org:kadaster ;
-  dct:subject
+  dcterm:creator org:kadaster ;
+  dcterm:subject
     topic:geography ,
     topic:netherlands ;
   ldm:distribution dist:bag ;
@@ -36,7 +36,7 @@ dist:bag a ldm:Distribution ;
   ldm:file [
     ldm:downloadLocation "https://krr.triply.cc/Kadaster/BAG/download.trig.gz"^^xsd:anyURI ;
     ldm:mediaType "application/gzip" ;
-    ldf:file [
+    ldm:file [
       ldm:mediaType "application/trig"
     ]
   ] .
@@ -46,8 +46,8 @@ dist:bag a ldm:Distribution ;
 # BRK
 
 data:brk a ldm:Dataset ;
-  dct:publisher org:kadaster ;
-  dct:subject
+  dcterm:creator org:kadaster ;
+  dcterm:subject
     topic:geography ,
     topic:netherlands ;
   ldm:distribution dist:brk ;
@@ -67,8 +67,8 @@ dist:brk a ldm:Distribution ;
 # BRT
 
 data:brt a ldm:Dataset ;
-  dct:publisher org:kadaster ;
-  dct:subject
+  dcterm:creator org:kadaster ;
+  dcterm:subject
     topic:geography ,
     topic:netherlands ;
   ldm:distribution dist:brt ;

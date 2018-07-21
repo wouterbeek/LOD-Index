@@ -1,11 +1,11 @@
     "citeseer": {
-      "dct:description": "This is one of several semantic repositories that contains and publishes RDF linked data and co-reference information, forming the underlying distributed storage model behind the RKB Explorer initiative.  This repository contains data from CiteSeer (Research Index).",
+      "dcterm:description": "This is one of several semantic repositories that contains and publishes RDF linked data and co-reference information, forming the underlying distributed storage model behind the RKB Explorer initiative.  This repository contains data from CiteSeer (Research Index).",
       "void:dataDump": [
         "http://citeseer.rkbexplorer.com/sitemap.xml"
       ]
     },
     "dbtune-classical": {
-      "dct:description": "A set of resources describes concepts and individuals related to the canon of Western Classical Music.  The data is aggregated and to hand curated by Chris Cannam at Queen Mary University of London.  It includes information about composers, compositions, performers, relationships of influence, and other data.  The intention is to provide a Linked Data resource that provides references to existing information sources.",
+      "dcterm:description": "A set of resources describes concepts and individuals related to the canon of Western Classical Music.  The data is aggregated and to hand curated by Chris Cannam at Queen Mary University of London.  It includes information about composers, compositions, performers, relationships of influence, and other data.  The intention is to provide a Linked Data resource that provides references to existing information sources.",
       "void:dataDump": [
         "https://c4dm.eecs.qmul.ac.uk/rdr/bitstream/handle/123456789/41/classical.tar.gz"
       ]
@@ -21,20 +21,20 @@
       ]
     }
     "pleiades": {
-      "dct:description": "Pleiades is a community-built gazetteer and graph of ancient places. It publishes authoritative information about ancient places and spaces, providing unique services for finding, displaying, and reusing that information under open license. It publishes not just for individual human users, but also for search engines and for the widening array of computational research and visualization tools that support humanities teaching and research.",
+      "dcterm:description": "Pleiades is a community-built gazetteer and graph of ancient places. It publishes authoritative information about ancient places and spaces, providing unique services for finding, displaying, and reusing that information under open license. It publishes not just for individual human users, but also for search engines and for the widening array of computational research and visualization tools that support humanities teaching and research.",
       "rdfs:label": "Pleiades",
       "void:dataDump": [
         "https://krr.triply.cc/wouter/pleiades/download.trig.gz"
       ]
     },
     "sackner-archive": {
-      "dct:description": "Ruth and Marvin Sackner founded the Archive in Miami Beach, Florida in 1979, later moving it to Miami, Florida in 2005. Its initial mission was to establish a collection of books, critical texts, periodicals, ephemera, prints, drawings, collages, paintings, sculptures, objects, manuscripts, and correspondence dealing with precedent and contemporary, internationally produced, concrete and visual poetry. The antecedent material had at its starting point, Stephane Mallarme’s poem, “Un Coup de Des” (Cosmopolis, 1897). The historic examples included works with concrete/visual poetic sensibilities from such twentieth century art movements as Italian Futurism, Russian and Eastern European Avant Garde, Dada, Surrealism, Bauhaus, De Stijl, Ultra, Tabu-Dada, Lettrisme, and Ultra-Lettrisme.",
+      "dcterm:description": "Ruth and Marvin Sackner founded the Archive in Miami Beach, Florida in 1979, later moving it to Miami, Florida in 2005. Its initial mission was to establish a collection of books, critical texts, periodicals, ephemera, prints, drawings, collages, paintings, sculptures, objects, manuscripts, and correspondence dealing with precedent and contemporary, internationally produced, concrete and visual poetry. The antecedent material had at its starting point, Stephane Mallarme’s poem, “Un Coup de Des” (Cosmopolis, 1897). The historic examples included works with concrete/visual poetic sensibilities from such twentieth century art movements as Italian Futurism, Russian and Eastern European Avant Garde, Dada, Surrealism, Bauhaus, De Stijl, Ultra, Tabu-Dada, Lettrisme, and Ultra-Lettrisme.",
       "void:dataDump": [
         "https://krr.triply.cc/wouter/sackner-archive/download.trig.gz"
       ]
     },
     "wordnet": {
-      "dct:description": "WordNet is a large lexical database of English.  Nouns, verbs, adjectives and adverbs are grouped into sets of cognitive synonyms (synsets), each expressing a distinct concept.  Synsets are interlinked by means of conceptual-semantic and lexical relations.  WordNet's structure makes it a useful tool for computational linguistics and natural language processing.",
+      "dcterm:description": "WordNet is a large lexical database of English.  Nouns, verbs, adjectives and adverbs are grouped into sets of cognitive synonyms (synsets), each expressing a distinct concept.  Synsets are interlinked by means of conceptual-semantic and lexical relations.  WordNet's structure makes it a useful tool for computational linguistics and natural language processing.",
       "rdfs:label": "Wordnet",
       "void:dataDump": [
         "http://simile.mit.edu/repository/datasets/wordnet/data/wordnet.zip"

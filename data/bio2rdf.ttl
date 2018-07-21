@@ -1,4 +1,4 @@
-prefix dct: <http://purl.org/dc/terms/>
+prefix dcterm: <http://purl.org/dc/terms/>
 prefix foaf: <http://xmlns.com/foaf/0.1/>
 prefix ldm: <https://ldm.cc/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -49,176 +49,176 @@ prefix topic: <https://index.lodlaundromat.org/topic/>
 # Datasets
 
 data:affymetrix a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:affymetrix ;
   rdfs:label "Affymetrix"@en .
 
 data:bioportal a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:bioportal ;
   rdfs:label "Bioportal"@en .
 
 data:clinicaltrials a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:clinicaltrials ;
   rdfs:label "Clinical trials"@en .
 
 data:ctd a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:ctd ;
   rdfs:label "ctd"@en .
 
 data:dbsnp a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:dbsnp ;
   rdfs:label "dbsnp"@en .
 
 data:drugbank a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:drugbank ;
   rdfs:label "Drugbank"@en .
 
 data:genage a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:genage ;
   rdfs:label "genage"@en .
 
 data:gendr a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:gendr ;
   rdfs:label "gendr"@en .
 
 data:goa a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:goa ;
   rdfs:label "goa"@en .
 
 data:hgnc a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:hgnc ;
   rdfs:label "hgnc"@en .
 
 data:homologene a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:homologene ;
   rdfs:label "homologene"@en .
 
 data:irefindex a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:irefindex ;
   rdfs:label "irefindex"@en .
 
 data:interpro a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:interpro ;
   rdfs:label "interpro"@en .
 
 data:kegg a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:kegg ;
   rdfs:label "kegg"@en .
 
 data:lsr a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:lsr ;
   rdfs:label "lsr"@en .
 
 data:mesh a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:mesh ;
   rdfs:label "mesh"@en .
 
 data:mgi a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:mgi ;
   rdfs:label "mgi"@en .
 
 data:miriam a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:miriam ;
   rdfs:label "miriam"@en .
 
 data:ncbigene a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:ncbigene ;
   rdfs:label "ncbigene"@en .
 
 data:ndc a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:ndc ;
   rdfs:label "ndc"@en .
 
 data:orphanet a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:orphanet ;
   rdfs:label "orphanet"@en .
 
 data:omim a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:omim ;
   rdfs:label "omim"@en .
 
 data:pharmgkb a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:pharmgkb ;
   rdfs:label "pharmgkb"@en .
 
 data:pubmed a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:pubmed ;
   rdfs:label "Pubmed"@en .
 
 data:refseq a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:refseq ;
   rdfs:label "refseq"@en .
 
 data:sgd a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:sgd ;
   rdfs:label "sgd"@en .
 
 data:sider a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:sider ;
   rdfs:label "sider"@en .
 
 data:taxonomy a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:taxonomy ;
   rdfs:label "Taxonomy"@en .
 
 data:wormbase a ldm:Dataset ;
-  dct:publisher org:bio2rdf ;
-  dct:subject topic:biomedical ;
+  dcterm:creator org:bio2rdf ;
+  dcterm:subject topic:biomedical ;
   ldm:distribution dist:wormbase ;
   rdfs:label "Wormbase"@en .
 

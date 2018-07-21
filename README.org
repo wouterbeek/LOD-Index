@@ -7,7 +7,7 @@ the web.
 * Commonly used prefixes
 
 #+BEGIN_SRC ttl
-prefix dct: <http://purl.org/dc/terms/>
+prefix dcterm: <http://purl.org/dc/terms/>
 prefix foaf: <http://xmlns.com/foaf/0.1/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
@@ -39,7 +39,7 @@ A dataset descriptions consists of the following assertions.
 data:LOCAL a ldm:Dataset;
   ldm:distribution dist:LOCAL;
   ldm:theme topic:LOCAL;
-  dct:publisher org:LOCAL;
+  dcterm:publisher org:LOCAL;
   rdfs:label "LABEL"@en.
 #+END_SRC
 

@@ -27,7 +27,7 @@ Generates LOD Index descriptions for CKAN sites.
 
 :- maplist(rdf_register_prefix, [
      data-'https://index.lodlaundromat.org/dataset/',
-     dct,
+     dcterm,
      dist-'https://index.lodlaundromat.org/distribution/',
      file-'https://index.lodlaundromat.org/file/',
      foaf,
@@ -80,14 +80,14 @@ assert_dataset(DatasetDict) :-
   rdf_assert_triple('https://index.lodlaundromat.org', ldm:dataset, Dataset),
   rdf_assert_triple(Dataset, rdf:type, ldm:'Dataset'),
   (   Description \== ''
-  ->  rdf_assert_triple(Dataset, dct:description, str(Description))
+  ->  rdf_assert_triple(Dataset, dcterm:description, str(Description))
   ;   true
   ),
   license_uri(LicenseId, License),
   rdf_prefix_iri(org:OrgLocal, Org),
-  rdf_assert_triple(Dataset, dct:creator, Org),
-  rdf_assert_triple(Dataset, dct:license, License),
-  rdf_assert_triple(Dataset, dct:title, str(Title)),
+  rdf_assert_triple(Dataset, dcterm:creator, Org),
+  rdf_assert_triple(Dataset, dcterm:license, License),
+  rdf_assert_triple(Dataset, dcterm:title, str(Title)),
   (   Uri \== ''
   ->  rdf_assert_triple(Dataset, foaf:homepage, uri(Uri))
   ;   true
@@ -105,10 +105,10 @@ assert_distribution(Distribution, ResourceDict) :-
       rdf_assert_triple(Distribution, ldm:file, File),
       rdf_assert_triple(File, ldm:downloadLocation, uri(Uri)),
       (   Description \== ''
-      ->  rdf_assert_triple(File, dct:description, str(Description))
+      ->  rdf_assert_triple(File, dcterm:description, str(Description))
       ;   true
       ),
-      rdf_assert_triple(File, dct:title, str(Name)),
+      rdf_assert_triple(File, dcterm:title, str(Name)),
       rdf_assert_triple(File, rdfs:label, str(Name))
   ;   true
   ).
@@ -118,10 +118,10 @@ assert_organization(ImgDir, OrgDict) :-
   rdf_prefix_iri(org:Local, Org),
   rdf_assert_triple(Org, rdf:type, foaf:'Org'),
   (   Description \== ''
-  ->  rdf_assert_triple(Org, dct:description, str(Description))
+  ->  rdf_assert_triple(Org, dcterm:description, str(Description))
   ;   true
   ),
-  rdf_assert_triple(Org, dct:title, str(Name)),
+  rdf_assert_triple(Org, dcterm:title, str(Name)),
   assert_organization_image(ImgDir, Org, Local, ImageUri),
   rdf_assert_triple(Org, rdfs:label, str(Name)).
 

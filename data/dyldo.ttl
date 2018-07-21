@@ -22,5 +22,5 @@ dist:dyldo a ldm:Distribution ;
     ldm:downloadLocation "http://km.aifb.kit.edu/projects/dyldo/data/2018-04-15/data.nq.gz"^^xsd:anyURI
   ] ;
   ldm:file [
-    "http://km.aifb.kit.edu/projects/dyldo/data/2018-04-15/headers.nq.gz"^^xsd:anyURI
+    ldm:downloadLocation "http://km.aifb.kit.edu/projects/dyldo/data/2018-04-15/headers.nq.gz"^^xsd:anyURI
   ] .

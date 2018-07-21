@@ -1,6 +1,6 @@
-/* LOD Cloud → LOD Index
+/* LOD Cloud Index
 
-Uploads the index for the LOD Cloud picture.
+Generated LOD Index descriptions for LOD Cloud files.
 
 @author Wouter Beek
 @version 2018
@@ -19,7 +19,7 @@ Uploads the index for the LOD Cloud picture.
 
 :- maplist(rdf_register_prefix, [
      data-'https://index.lodlaundromat.org/dataset/',
-     dct,
+     dcterm,
      dist-'https://index.lodlaundromat.org/distribution/',
      foaf,
      graph-'https://lodlaundromat.org/graph/',
@@ -36,61 +36,64 @@ Uploads the index for the LOD Cloud picture.
    set_setting(rdf_term:bnode_prefix_authority, 'lodlaundromat.org').
 
 run :-
-  run('../data/2018-lod-cloud.json.gz').
+  run('/home/wbeek/data/LOD-Cloud/2018-07-08.json.gz').
 
 run(File) :-
-  open_json(File, Dict),
+  json_load(File, Struct),
   forall(
-    get_dict(Local, Dict, Dict0),
-    assert_dataset(Local, Dict0)
+    get_dict(Local, Struct, Dict),
+    assert_dataset(Local, Dict)
   ),
   rdf_save('index.nq.gz').
 
 assert_dataset(Local, Dict) :-
   rdf_equal(graph:index, G),
-  rdf_prefix_iri(data:Local, S),
-  rdf_prefix_iri(topic:Dict.domain, Topic),
-  rdf_assert_triple(S, rdf:type, ldm:'Dataset', G),
+  rdf_prefix_iri(data:Local, Dataset),
+  rdf_assert_triple(Dataset, rdf:type, ldm:'Dataset', G),
   forall(
     get_dict(LTag, Dict.description, Lex),
-    rdf_assert_triple(S, dct:description, Lex-LTag, G)
+    rdf_assert_triple(Dataset, dcterm:description, Lex-LTag, G)
   ),
-  rdf_assert_triple(S, dct:subject, Topic, G),
-  rdf_bnode_iri(Publisher),
-  rdf_assert_triple(S, dct:publisher, Publisher, G),
-  rdf_assert_triple(Publisher, rdf:type, foaf:'Organization', G),
-  rdf_assert_triple(Publisher, foaf:homepage, uri(Dict.contact_point.email), G),
-  rdf_assert_triple(Publisher, rdfs:label, str(Dict.contact_point.name), G),
-  rdf_assert_triple(S, foaf:homepage, uri(Dict.website), G),
-  rdf_assert_triple(S, rdfs:label, str(Dict.title), G),
+  rdf_prefix_iri(topic:Dict.domain, Topic),
+  rdf_assert_triple(Dataset, dcterm:subject, Topic, G),
+  rdf_bnode_iri(Org),
+  rdf_assert_triple(Dataset, dcterm:creator, Org, G),
+  rdf_assert_triple(Org, rdf:type, foaf:'Organization', G),
+  rdf_assert_triple(Org, foaf:homepage, uri(Dict.contact_point.email), G),
+  rdf_assert_triple(Org, rdfs:label, str(Dict.contact_point.name), G),
+  rdf_assert_triple(Dataset, foaf:homepage, uri(Dict.website), G),
+  rdf_assert_triple(Dataset, rdfs:label, str(Dict.title), G),
   get_dict(triples, Dict, Triples),
   (atom(Triples) -> Lex = Triples ; atom_number(Lex, Triples)),
-  rdf_assert_triple(S, ldm:triples, str(Lex), G),
-  rdf_assert_triple(S, ldm:namespace, uri(Dict.namespace), G),
-  maplist(assert_distribution(S, G, access_url), Dict.other_download),
-  maplist(assert_distribution(S, G, download_url), Dict.full_download),
-  maplist(assert_endpoint(S, G), Dict.sparql).
+  rdf_assert_triple(Dataset, ldm:triples, str(Lex), G),
+  (   get_dict(namespace, Dict, Namespace)
+  ->  rdf_assert_triple(Dataset, ldm:namespace, uri(Namespace), G)
+  ;   true
+  ),
+  maplist(assert_distribution(Dataset, G, access_url), Dict.other_download),
+  maplist(assert_distribution(Dataset, G, download_url), Dict.full_download),
+  maplist(assert_endpoint(Dataset, G), Dict.sparql).
 
-assert_distribution(S, G, Key, Dict) :-
-  rdf_bnode_iri(O),
-  rdf_assert_triple(S, ldm:distribution, O, G),
-  rdf_assert_triple(O, rdf:type, ldm:'Distribution', G),
+assert_distribution(Dataset, G, Key, Dict) :-
+  rdf_bnode_iri(Distribution),
+  rdf_assert_triple(Dataset, ldm:distribution, Distribution, G),
+  rdf_assert_triple(Distribution, rdf:type, ldm:'Distribution', G),
   (   get_dict(description, Dict, Lex1)
-  ->  rdf_assert_triple(O, dct:description, str(Lex1), G)
+  ->  rdf_assert_triple(Distribution, dcterm:description, str(Lex1), G)
   ;   true
   ),
   get_dict(Key, Dict, Url),
-  rdf_assert_triple(O, ldm:downloadLocation, uri(Url), G),
+  rdf_assert_triple(Distribution, ldm:downloadLocation, uri(Url), G),
   (   get_dict(media_type, Dict, Lex2)
-  ->  rdf_assert_triple(O, ldm:mediaType, str(Lex2), G)
+  ->  rdf_assert_triple(Distribution, ldm:mediaType, str(Lex2), G)
   ;   true
   ),
   (   get_dict(title, Dict, Lex3)
-  ->  rdf_assert_triple(O, rdfs:label, str(Lex3), G)
+  ->  rdf_assert_triple(Distribution, rdfs:label, str(Lex3), G)
   ;   true
   ).
 
-assert_endpoint(S, G, Dict) :-
+assert_endpoint(Dataset, G, Dict) :-
   get_dict(access_url, Dict, Url), !,
-  rdf_assert_triple(S, ldm:sparqlEndpoint, uri(Url), G).
+  rdf_assert_triple(Dataset, ldm:sparqlEndpoint, uri(Url), G).
 assert_endpoint(_, _, _).
