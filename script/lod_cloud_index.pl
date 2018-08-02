@@ -46,7 +46,7 @@ run(File) :-
     get_dict(Key, Struct, Dict),
     assert_dataset(Key, Dict)
   ),
-  rdf_save(Local2).
+  rdf_save_file(Local2).
 
 assert_dataset(Key, Dict) :-
   rdf_prefix_iri(data:Key, Dataset),

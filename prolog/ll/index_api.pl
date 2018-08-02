@@ -50,4 +50,4 @@ index_download_location(Uri) :-
 
 index_statement(S, P, O) :-
   current_user(User),
-  statement(_, User, index, S, P, O).
+  statement(_, User, index2, S, P, O).

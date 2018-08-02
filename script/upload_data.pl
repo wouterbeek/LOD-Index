@@ -29,4 +29,4 @@ run :-
     topic-'https://index.lodlaundromat.org/topic/',
     xsd
   ],
-  dataset_upload(_, User, index, _{files: DataFiles, prefixes: Prefixes}).
+  dataset_upload(_, User, index2, _{files: DataFiles, prefixes: Prefixes}).

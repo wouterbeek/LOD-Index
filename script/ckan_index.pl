@@ -53,9 +53,9 @@ run(Uri) :-
   directory_file_path(TmpDir0, Name, TmpDir),
   % Assert datasets and organizations in RDF.
   %ckan_export(Uri, TmpDir),
-  open_json(TmpDir, organization, OrgDicts),
+  json_load_(TmpDir, organization, OrgDicts),
   maplist(assert_organization(ImgDir), OrgDicts),
-  open_json(TmpDir, package, DatasetDicts),
+  json_load_(TmpDir, package, DatasetDicts),
   maplist(assert_dataset, DatasetDicts),
   % Save RDF to file.
   absolute_file_name(
@@ -63,7 +63,12 @@ run(Uri) :-
     File,
     [access(write),extensions([nt]),relative_to(DataDir)]
   ),
-  rdf_save(File).
+  rdf_save_file(File).
+
+json_load_(Dir, Base, Dicts) :-
+  file_name_extension(Base, 'json.gz', Local),
+  directory_file_path(Dir, Local, File),
+  json_load(File, Dicts).
 
 assert_dataset(DatasetDict) :-
   _{
@@ -135,7 +140,7 @@ assert_organization_image(ImgDir, Org, Local, Uri) :-
           (   media_type_extension(_MediaType, Extension)
           ->  update_image_file_name(Path, Extension),
               file_name_extension(Local, Extension, AssetName),
-              triply_image_uri(wouter, index, AssetName, AssetUri),
+              asset_uri(_, _, index2, AssetName, AssetUri),
               rdf_assert_triple(Org, foaf:depiction, uri(AssetUri))
           ;   print_message(warning, unrecognized_image_format(Format)),
               delete_file(Path)
@@ -162,27 +167,3 @@ license_uri('cc-by', 'https://creativecommons.org/licenses/by/4.0/').
 license_uri('cc-by-sa', 'https://creativecommons.org/licenses/by-sa/4.0/').
 license_uri('cc-nc', 'https://creativecommons.org/licenses/by-nc/4.0/').
 license_uri('cc-zero', 'https://creativecommons.org/publicdomain/zero/1.0/').
-
-triply_image_uri(User, Dataset, Path, Uri) :-
-  file_base_name(Path, File),
-  uri_comps(
-    Uri,
-    uri(
-      https,
-      'data.lodlaundromat.org',
-      ['_api',datasets,User,Dataset,assets,download],
-      [fileName(File)],
-      _
-    )
-  ).
-
-
-
-% HELPERS %
-
-%! open_json(+Directory:atom, +Base:atom, -Dicts:list(dict)) is det.
-
-open_json(Dir, Base, Dicts) :-
-  file_name_extension(Base, 'json.gz', Local),
-  directory_file_path(Dir, Local, File),
-  json_load(File, Dicts).
