@@ -19,6 +19,7 @@ run :-
   expand_file_name('../data/*.ttl', DataFiles),
   Prefixes = [
     data-'https://index.lodlaundromat.org/dataset/',
+    bnode,
     dcterm,
     dist-'https://index.lodlaundromat.org/distribution/',
     foaf,
@@ -29,4 +30,4 @@ run :-
     topic-'https://index.lodlaundromat.org/topic/',
     xsd
   ],
-  dataset_upload(_, User, index2, _{files: DataFiles, prefixes: Prefixes}).
+  dataset_upload(_, User, index, _{files: DataFiles, prefixes: Prefixes}).

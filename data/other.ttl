@@ -1,12 +1,12 @@
 prefix dcterm: <http://purl.org/dc/terms/>
 prefix foaf: <http://xmlns.com/foaf/0.1/>
-prefix ldm: <https://ldm.cc/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 
 prefix data: <https://index.lodlaundromat.org/dataset/>
 prefix dist: <https://index.lodlaundromat.org/distribution/>
+prefix ldm: <https://ldm.cc/>
 prefix org: <https://index.lodlaundromat.org/organization/>
 prefix topic: <https://index.lodlaundromat.org/topic/>
 

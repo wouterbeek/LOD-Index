@@ -22,7 +22,7 @@ Generated LOD Index descriptions for LOD Cloud files.
      dist-'https://index.lodlaundromat.org/distribution/',
      foaf,
      graph-'https://lodlaundromat.org/graph/',
-     ldm-'https://ldm.cc/',
+     ldm,
      org-'https://index.lodlaundromat.org/organization/',
      rdf,
      rdfs,
@@ -85,7 +85,7 @@ assert_distribution(Dataset, Key, Dict) :-
   ),
   get_dict(Key, Dict, Url),
   % Skip syntactically malformed download URIs.
-  (   catch(is_iri(Url), E, print_message(error,E)),
+  (   catch(is_uri(Url), E, print_message(error,E)),
       var(E)
   ->  rdf_assert_triple(Distribution, ldm:downloadLocation, uri(Url))
   ;   true

@@ -23,6 +23,7 @@ Generates LOD Index descriptions for CKAN sites.
 :- use_module(library(semweb/rdf_mem)).
 :- use_module(library(semweb/rdf_prefix)).
 :- use_module(library(semweb/rdf_term)).
+:- use_module(library(tapir/tapir_api)).
 :- use_module(library(uri_ext)).
 
 :- maplist(rdf_register_prefix, [
@@ -31,7 +32,7 @@ Generates LOD Index descriptions for CKAN sites.
      dist-'https://index.lodlaundromat.org/distribution/',
      file-'https://index.lodlaundromat.org/file/',
      foaf,
-     ldm-'https://ldm.cc/',
+     ldm,
      org-'https://index.lodlaundromat.org/organization/',
      rdf,
      rdfs,
@@ -140,7 +141,7 @@ assert_organization_image(ImgDir, Org, Local, Uri) :-
           (   media_type_extension(_MediaType, Extension)
           ->  update_image_file_name(Path, Extension),
               file_name_extension(Local, Extension, AssetName),
-              asset_uri(_, _, index2, AssetName, AssetUri),
+              asset_uri(_, _, index, AssetName, AssetUri),
               rdf_assert_triple(Org, foaf:depiction, uri(AssetUri))
           ;   print_message(warning, unrecognized_image_format(Format)),
               delete_file(Path)

@@ -1,10 +1,10 @@
 prefix foaf: <http://xmlns.com/foaf/0.1/>
-prefix ldm: <https://ldm.cc/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 
 prefix data: <https://index.lodlaundromat.org/dataset/>
 prefix dist: <https://index.lodlaundromat.org/distribution/>
+prefix ldm: <https://ldm.cc/>
 
 <https://index.lodlaundromat.org> a ldm:Catalog ;
   ldm:dataset data:dyldo .

@@ -19,10 +19,7 @@
 :- use_module(library(semweb/rdf_term)).
 :- use_module(library(tapir/tapir_api)).
 
-:- maplist(rdf_register_prefix, [
-     ldm-'https://ldm.cc/',
-     rdf
-   ]).
+:- maplist(rdf_register_prefix, [ldm,rdf]).
 
 :- rdf_meta
    index_statement(r, r, o).
@@ -50,4 +47,4 @@ index_download_location(Uri) :-
 
 index_statement(S, P, O) :-
   current_user(User),
-  statement(_, User, index2, S, P, O).
+  statement(_, User, index, S, P, O).
