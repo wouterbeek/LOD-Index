@@ -16,7 +16,7 @@ run :-
   current_user(User),
   %expand_file_name('../img/*', ImageFiles0),
   %include(is_image, ImageFiles0, ImageFiles),
-  expand_file_name('../data/*.ttl', DataFiles),
+  expand_file_name('../data/*.{nt,ttl}', DataFiles),
   Prefixes = [
     bnode,
     data-'https://index.lodlaundromat.org/dataset/',
