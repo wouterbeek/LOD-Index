@@ -1,6 +1,10 @@
-/* LOD Cloud Index
+:- module(lod_cloud_index, [run/0]).
 
-Generated LOD Index descriptions for LOD Cloud files.
+/** <module> LOD Cloud Index script
+
+Generates LOD Index descriptions based on LOD Cloud source files.
+
+---
 
 @author Wouter Beek
 @version 2018
@@ -67,13 +71,8 @@ assert_dataset(Key, Dict) :-
   get_dict(triples, Dict, Triples),
   (atom(Triples) -> Lex = Triples ; atom_number(Lex, Triples)),
   rdf_assert_triple(Dataset, ldm:triples, str(Lex)),
-  %(   get_dict(namespace, Dict, Namespace)
-  %->  rdf_assert_triple(Dataset, ldm:namespace, uri(Namespace))
-  %;   true
-  %),
   maplist(assert_distribution(Dataset, access_url), Dict.other_download),
   maplist(assert_distribution(Dataset, download_url), Dict.full_download).
-  %maplist(assert_endpoint(Dataset), Dict.sparql).
 
 assert_distribution(Dataset, Key, Dict) :-
   rdf_bnode_iri(Distribution),
@@ -83,11 +82,13 @@ assert_distribution(Dataset, Key, Dict) :-
   ->  rdf_assert_triple(Distribution, dcterm:description, str(Lex1))
   ;   true
   ),
-  get_dict(Key, Dict, Url),
+  % When we look at the source file, these are not URLs/URIs but IRIs!
+  get_dict(Key, Dict, Iri),
   % Skip syntactically malformed download URIs.
-  (   catch(is_uri(Url), E, print_message(error,E)),
+  (   uri_iri(Uri, Iri),
+      catch(is_uri(Uri), E, print_message(error,E)),
       var(E)
-  ->  rdf_assert_triple(Distribution, ldm:downloadLocation, uri(Url))
+  ->  rdf_assert_triple(Distribution, ldm:downloadLocation, uri(Uri))
   ;   true
   ),
   (   get_dict(media_type, Dict, Lex2)
@@ -98,8 +99,3 @@ assert_distribution(Dataset, Key, Dict) :-
   ->  rdf_assert_triple(Distribution, rdfs:label, str(Lex3))
   ;   true
   ).
-
-%assert_endpoint(Dataset, Dict) :-
-%  get_dict(access_url, Dict, Url), !,
-%  rdf_assert_triple(Dataset, ldm:sparqlEndpoint, uri(Url)).
-%assert_endpoint(_, _).
