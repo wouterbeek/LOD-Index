@@ -6,23 +6,16 @@ Generates LOD Index descriptions for CKAN sites.
 @version 2018
 */
 
-:- use_module(library(aggregate)).
 :- use_module(library(apply)).
-:- use_module(library(http/json)).
-:- use_module(library(zlib)).
 
-:- use_module(library(dict)).
+:- use_module(library(conf_ext)).
 :- use_module(library(file_ext)).
 :- use_module(library(http/ckan_api)).
-:- use_module(library(http/ckan_export)).
 :- use_module(library(http/http_client2)).
-:- use_module(library(image)).
-:- use_module(library(json_ext)).
+:- use_module(library(image)). % Incorrectly shown in red in PCEmacs.
 :- use_module(library(media_type)).
-:- use_module(library(pp)).
 :- use_module(library(semweb/rdf_mem)).
 :- use_module(library(semweb/rdf_prefix)).
-:- use_module(library(semweb/rdf_term)).
 :- use_module(library(tapir/tapir_api)).
 :- use_module(library(uri_ext)).
 
@@ -40,24 +33,25 @@ Generates LOD Index descriptions for CKAN sites.
      xsd
    ]).
 
-
-
 run :-
   run('https://opendata.oorlogsbronnen.nl/').
 
 run(Uri) :-
-  % Determine the various directory names.
-  working_directory(Dir0),
-  directory_parent(Dir0, Dir),
-  maplist(directory_file_path(Dir), [data,img,tmp], [DataDir,ImgDir,TmpDir0]),
+  % Create the various directories.
+  conf_json(Conf),
   ckan_uri_name(Uri, Name),
-  directory_file_path(TmpDir0, Name, TmpDir),
-  % Assert datasets and organizations in RDF.
-  %ckan_export(Uri, TmpDir),
-  json_load_(TmpDir, organization, OrgDicts),
-  maplist(assert_organization(ImgDir), OrgDicts),
-  json_load_(TmpDir, package, DatasetDicts),
-  maplist(assert_dataset, DatasetDicts),
+  directory_file_path(Conf.'data-directory', Name, Dir),
+  maplist(directory_file_path(Dir), [data,img,tmp], [DataDir,ImgDir,TmpDir]),
+  maplist(make_directory_path, [DataDir,ImgDir,TmpDir]),
+  % Store CKAN content in RDF.
+  forall(
+    ckan_organization(Uri, Dict),
+    assert_organization(ImgDir, Dict)
+  ),
+  forall(
+    ckan_package(Uri, Dict),
+    assert_dataset(Dict)
+  ),
   % Save RDF to file.
   absolute_file_name(
     Name,
@@ -65,11 +59,6 @@ run(Uri) :-
     [access(write),extensions([nt]),relative_to(DataDir)]
   ),
   rdf_save_file(File).
-
-json_load_(Dir, Base, Dicts) :-
-  file_name_extension(Base, 'json.gz', Local),
-  directory_file_path(Dir, Local, File),
-  json_load(File, Dicts).
 
 assert_dataset(DatasetDict) :-
   _{
