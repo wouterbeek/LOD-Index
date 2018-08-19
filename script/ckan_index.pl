@@ -33,7 +33,7 @@ Generates LOD Index descriptions for CKAN sites.
      file-'https://index.lodlaundromat.org/file/',
      foaf,
      ldm,
-     org-'https://index.lodlaundromat.org/organization/',
+     organization-'https://index.lodlaundromat.org/organization/',
      rdf,
      rdfs,
      topic-'https://index.lodlaundromat.org/topic/',
@@ -90,7 +90,7 @@ assert_dataset(DatasetDict) :-
   ;   true
   ),
   license_uri(LicenseId, License),
-  rdf_prefix_iri(org:OrgLocal, Org),
+  rdf_prefix_iri(organization:OrgLocal, Org),
   rdf_assert_triple(Dataset, dcterm:creator, Org),
   rdf_assert_triple(Dataset, dcterm:license, License),
   rdf_assert_triple(Dataset, dcterm:title, str(Title)),
@@ -121,7 +121,7 @@ assert_distribution(Distribution, ResourceDict) :-
 
 assert_organization(ImgDir, OrgDict) :-
   _{description: Description, image_url: ImageUri, name: Local, title: Name} :< OrgDict,
-  rdf_prefix_iri(org:Local, Org),
+  rdf_prefix_iri(organization:Local, Org),
   rdf_assert_triple(Org, rdf:type, foaf:'Org'),
   (   Description \== ''
   ->  rdf_assert_triple(Org, dcterm:description, str(Description))
