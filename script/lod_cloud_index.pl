@@ -86,8 +86,7 @@ assert_distribution(Dataset, Key, Dict) :-
   get_dict(Key, Dict, Iri),
   % Skip syntactically malformed download URIs.
   (   uri_iri(Uri, Iri),
-      catch(is_uri(Uri), E, print_message(error,E)),
-      var(E)
+      is_uri(Uri)
   ->  rdf_assert_triple(Distribution, ldm:downloadLocation, uri(Uri))
   ;   true
   ),

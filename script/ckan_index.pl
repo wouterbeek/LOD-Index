@@ -106,7 +106,7 @@ assert_dataset(DatasetDict) :-
 
 assert_distribution(Distribution, ResourceDict) :-
   _{description: Description, id: Local, name: Name, url: Uri} :< ResourceDict,
-  (   Uri \== ''
+  (   is_uri(Uri)
   ->  rdf_prefix_iri(file:Local, File),
       rdf_assert_triple(Distribution, ldm:file, File),
       rdf_assert_triple(File, ldm:downloadLocation, uri(Uri)),
@@ -133,7 +133,7 @@ assert_organization(ImgDir, OrgDict) :-
 
 assert_organization_image(ImgDir, Org, Local, Uri) :-
   directory_file_path(ImgDir, Local, Path),
-  (   is_uri(Uri)
+  (   is_http_uri(Uri)
   ->  http_download(Uri, Path),
       catch(image_format(Path, Format), E, true),
       (   var(E)
