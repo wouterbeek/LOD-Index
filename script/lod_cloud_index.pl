@@ -65,12 +65,12 @@ assert_dataset(Key, Dict) :-
   rdf_assert_triple(Dataset, dcterm:creator, Org),
   rdf_assert_triple(Org, rdf:type, foaf:'Organization'),
   rdf_assert_triple(Org, foaf:homepage, uri(Dict.contact_point.email)),
-  rdf_assert_triple(Org, rdfs:label, str(Dict.contact_point.name)),
+  rdf_assert_triple(Org, rdfs:label, string(Dict.contact_point.name)),
   rdf_assert_triple(Dataset, foaf:homepage, uri(Dict.website)),
-  rdf_assert_triple(Dataset, rdfs:label, str(Dict.title)),
+  rdf_assert_triple(Dataset, rdfs:label, string(Dict.title)),
   get_dict(triples, Dict, Triples),
   (atom(Triples) -> Lex = Triples ; atom_number(Lex, Triples)),
-  rdf_assert_triple(Dataset, ldm:triples, str(Lex)),
+  rdf_assert_triple(Dataset, ldm:triples, string(Lex)),
   maplist(assert_distribution(Dataset, access_url), Dict.other_download),
   maplist(assert_distribution(Dataset, download_url), Dict.full_download).
 
@@ -79,7 +79,7 @@ assert_distribution(Dataset, Key, Dict) :-
   rdf_assert_triple(Dataset, ldm:distribution, Distribution),
   rdf_assert_triple(Distribution, rdf:type, ldm:'Distribution'),
   (   get_dict(description, Dict, Lex1)
-  ->  rdf_assert_triple(Distribution, dcterm:description, str(Lex1))
+  ->  rdf_assert_triple(Distribution, dcterm:description, string(Lex1))
   ;   true
   ),
   % When we look at the source file, these are not URLs/URIs but IRIs!
@@ -91,10 +91,10 @@ assert_distribution(Dataset, Key, Dict) :-
   ;   true
   ),
   (   get_dict(media_type, Dict, Lex2)
-  ->  rdf_assert_triple(Distribution, ldm:mediaType, str(Lex2))
+  ->  rdf_assert_triple(Distribution, ldm:mediaType, string(Lex2))
   ;   true
   ),
   (   get_dict(title, Dict, Lex3)
-  ->  rdf_assert_triple(Distribution, rdfs:label, str(Lex3))
+  ->  rdf_assert_triple(Distribution, rdfs:label, string(Lex3))
   ;   true
   ).

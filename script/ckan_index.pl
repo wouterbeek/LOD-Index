@@ -75,19 +75,19 @@ assert_dataset(DatasetDict) :-
   rdf_assert_triple('https://index.lodlaundromat.org', ldm:dataset, Dataset),
   rdf_assert_triple(Dataset, rdf:type, ldm:'Dataset'),
   (   Description \== ''
-  ->  rdf_assert_triple(Dataset, dcterm:description, str(Description))
+  ->  rdf_assert_triple(Dataset, dcterm:description, string(Description))
   ;   true
   ),
   license_uri(LicenseId, License),
   rdf_prefix_iri(organization:OrgLocal, Org),
   rdf_assert_triple(Dataset, dcterm:creator, Org),
   rdf_assert_triple(Dataset, dcterm:license, License),
-  rdf_assert_triple(Dataset, dcterm:title, str(Title)),
+  rdf_assert_triple(Dataset, dcterm:title, string(Title)),
   (   Uri \== ''
   ->  rdf_assert_triple(Dataset, foaf:homepage, uri(Uri))
   ;   true
   ),
-  rdf_assert_triple(Dataset, rdfs:label, str(Title)),
+  rdf_assert_triple(Dataset, rdfs:label, string(Title)),
   rdf_prefix_iri(dist:DatasetLocal, Distribution),
   rdf_assert_triple(Distribution, rdf:type, ldm:'Distribution'),
   rdf_assert_triple(Dataset, ldm:distribution, Distribution),
@@ -100,11 +100,11 @@ assert_distribution(Distribution, ResourceDict) :-
       rdf_assert_triple(Distribution, ldm:file, File),
       rdf_assert_triple(File, ldm:downloadLocation, uri(Uri)),
       (   Description \== ''
-      ->  rdf_assert_triple(File, dcterm:description, str(Description))
+      ->  rdf_assert_triple(File, dcterm:description, string(Description))
       ;   true
       ),
-      rdf_assert_triple(File, dcterm:title, str(Name)),
-      rdf_assert_triple(File, rdfs:label, str(Name))
+      rdf_assert_triple(File, dcterm:title, string(Name)),
+      rdf_assert_triple(File, rdfs:label, string(Name))
   ;   true
   ).
 
@@ -113,12 +113,12 @@ assert_organization(ImgDir, OrgDict) :-
   rdf_prefix_iri(organization:Local, Org),
   rdf_assert_triple(Org, rdf:type, foaf:'Org'),
   (   Description \== ''
-  ->  rdf_assert_triple(Org, dcterm:description, str(Description))
+  ->  rdf_assert_triple(Org, dcterm:description, string(Description))
   ;   true
   ),
-  rdf_assert_triple(Org, dcterm:title, str(Name)),
+  rdf_assert_triple(Org, dcterm:title, string(Name)),
   assert_organization_image(ImgDir, Org, Local, ImageUri),
-  rdf_assert_triple(Org, rdfs:label, str(Name)).
+  rdf_assert_triple(Org, rdfs:label, string(Name)).
 
 assert_organization_image(ImgDir, Org, Local, Uri) :-
   directory_file_path(ImgDir, Local, Path),
