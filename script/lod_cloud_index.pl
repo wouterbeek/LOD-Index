@@ -15,6 +15,7 @@ Generates LOD Index descriptions based on LOD Cloud source files.
 
 :- use_module(library(file_ext)).
 :- use_module(library(json_ext)).
+:- use_module(library(semweb/rdf_api)).
 :- use_module(library(semweb/rdf_mem)).
 :- use_module(library(semweb/rdf_prefix)).
 :- use_module(library(semweb/rdf_term)).
@@ -22,7 +23,7 @@ Generates LOD Index descriptions based on LOD Cloud source files.
 
 :- maplist(rdf_register_prefix, [
      data-'https://index.lodlaundromat.org/dataset/',
-     dcterm,
+     dct,
      dist-'https://index.lodlaundromat.org/distribution/',
      foaf,
      graph-'https://lodlaundromat.org/graph/',
@@ -46,40 +47,41 @@ run(File) :-
   file_name_extensions(Local1, Name, [json,gz]),
   file_name_extensions(Local2, Name, [ttl]),
   json_load(File, Struct),
+  rdf_equal(G, graph:tmp),
   forall(
     get_dict(Key, Struct, Dict),
-    assert_dataset(Key, Dict)
+    assert_dataset(mem(G), Key, Dict)
   ),
-  rdf_save_file(Local2).
+  rdf_save_file(Local2, [graph(G)]).
 
-assert_dataset(Key, Dict) :-
+assert_dataset(B, Key, Dict) :-
   rdf_prefix_iri(data:Key, Dataset),
-  rdf_assert_triple(Dataset, rdf:type, ldm:'Dataset'),
+  assert_instance(B, Dataset, ldm:'Dataset'),
   forall(
     get_dict(LTag, Dict.description, Lex),
-    rdf_assert_triple(Dataset, dcterm:description, Lex-LTag)
+    assert_triple(B, Dataset, dct:description, Lex-LTag)
   ),
   rdf_prefix_iri(topic:Dict.domain, Topic),
-  rdf_assert_triple(Dataset, dcterm:subject, Topic),
+  assert_triple(B, Dataset, dct:subject, Topic),
   rdf_bnode_iri(Org),
-  rdf_assert_triple(Dataset, dcterm:creator, Org),
-  rdf_assert_triple(Org, rdf:type, foaf:'Organization'),
-  rdf_assert_triple(Org, foaf:homepage, uri(Dict.contact_point.email)),
-  rdf_assert_triple(Org, rdfs:label, string(Dict.contact_point.name)),
-  rdf_assert_triple(Dataset, foaf:homepage, uri(Dict.website)),
-  rdf_assert_triple(Dataset, rdfs:label, string(Dict.title)),
+  assert_triple(B, Dataset, dct:creator, Org),
+  assert_instance(B, Org, foaf:'Organization'),
+  assert_triple(B, Org, foaf:homepage, uri(Dict.contact_point.email)),
+  assert_triple(B, Org, rdfs:label, string(Dict.contact_point.name)),
+  assert_triple(B, Dataset, foaf:homepage, uri(Dict.website)),
+  assert_triple(B, Dataset, rdfs:label, string(Dict.title)),
   get_dict(triples, Dict, Triples),
   (atom(Triples) -> Lex = Triples ; atom_number(Lex, Triples)),
-  rdf_assert_triple(Dataset, ldm:triples, string(Lex)),
+  assert_triple(B, Dataset, ldm:triples, string(Lex)),
   maplist(assert_distribution(Dataset, access_url), Dict.other_download),
   maplist(assert_distribution(Dataset, download_url), Dict.full_download).
 
 assert_distribution(Dataset, Key, Dict) :-
   rdf_bnode_iri(Distribution),
-  rdf_assert_triple(Dataset, ldm:distribution, Distribution),
-  rdf_assert_triple(Distribution, rdf:type, ldm:'Distribution'),
+  assert_triple(B, Dataset, ldm:distribution, Distribution),
+  assert_instance(B, Distribution, ldm:'Distribution'),
   (   get_dict(description, Dict, Lex1)
-  ->  rdf_assert_triple(Distribution, dcterm:description, string(Lex1))
+  ->  assert_triple(B, Distribution, dct:description, string(Lex1))
   ;   true
   ),
   % When we look at the source file, these are not URLs/URIs but IRIs!
@@ -87,14 +89,14 @@ assert_distribution(Dataset, Key, Dict) :-
   % Skip syntactically malformed download URIs.
   (   uri_iri(Uri, Iri),
       is_uri(Uri)
-  ->  rdf_assert_triple(Distribution, ldm:downloadLocation, uri(Uri))
+  ->  assert_triple(B, Distribution, ldm:downloadLocation, uri(Uri))
   ;   true
   ),
   (   get_dict(media_type, Dict, Lex2)
-  ->  rdf_assert_triple(Distribution, ldm:mediaType, string(Lex2))
+  ->  assert_triple(B, Distribution, ldm:mediaType, string(Lex2))
   ;   true
   ),
   (   get_dict(title, Dict, Lex3)
-  ->  rdf_assert_triple(Distribution, rdfs:label, string(Lex3))
+  ->  assert_triple(B, Distribution, rdfs:label, string(Lex3))
   ;   true
   ).

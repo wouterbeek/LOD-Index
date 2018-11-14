@@ -21,7 +21,7 @@ Generates LOD Index descriptions for CKAN sites.
 
 :- maplist(rdf_register_prefix, [
      data-'https://index.lodlaundromat.org/dataset/',
-     dcterm,
+     dct,
      dist-'https://index.lodlaundromat.org/distribution/',
      file-'https://index.lodlaundromat.org/file/',
      foaf,
@@ -44,13 +44,14 @@ run(Uri) :-
   maplist(directory_file_path(Dir), [data,img,tmp], [DataDir,ImgDir,TmpDir]),
   maplist(make_directory_path, [DataDir,ImgDir,TmpDir]),
   % Store CKAN content in RDF.
+  rdf_equal(G, graph:tmp),
   forall(
     ckan_organization(Uri, Dict),
-    assert_organization(ImgDir, Dict)
+    assert_organization(mem(G), ImgDir, Dict)
   ),
   forall(
     ckan_package(Uri, Dict),
-    assert_dataset(Dict)
+    assert_dataset(mem(G), Dict)
   ),
   % Save RDF to file.
   absolute_file_name(
@@ -58,9 +59,9 @@ run(Uri) :-
     File,
     [access(write),extensions([nt]),relative_to(DataDir)]
   ),
-  rdf_save_file(File).
+  rdf_save_file(File, [graph(G)]).
 
-assert_dataset(DatasetDict) :-
+assert_dataset(B, DatasetDict) :-
   _{
     'license_id': LicenseId,
     name: DatasetLocal,
@@ -72,55 +73,55 @@ assert_dataset(DatasetDict) :-
   } :< DatasetDict,
   _{name: OrgLocal} :< OrgDict,
   rdf_prefix_iri(data:DatasetLocal, Dataset),
-  rdf_assert_triple('https://index.lodlaundromat.org', ldm:dataset, Dataset),
-  rdf_assert_triple(Dataset, rdf:type, ldm:'Dataset'),
+  assert_triple(B, 'https://index.lodlaundromat.org', ldm:dataset, Dataset),
+  assert_instance(B, Dataset, ldm:'Dataset'),
   (   Description \== ''
-  ->  rdf_assert_triple(Dataset, dcterm:description, string(Description))
+  ->  assert_triple(B, Dataset, dct:description, string(Description))
   ;   true
   ),
   license_uri(LicenseId, License),
   rdf_prefix_iri(organization:OrgLocal, Org),
-  rdf_assert_triple(Dataset, dcterm:creator, Org),
-  rdf_assert_triple(Dataset, dcterm:license, License),
-  rdf_assert_triple(Dataset, dcterm:title, string(Title)),
+  assert_triple(B, Dataset, dct:creator, Org),
+  assert_triple(B, Dataset, dct:license, License),
+  assert_triple(B, Dataset, dct:title, string(Title)),
   (   Uri \== ''
-  ->  rdf_assert_triple(Dataset, foaf:homepage, uri(Uri))
+  ->  assert_triple(B, Dataset, foaf:homepage, uri(Uri))
   ;   true
   ),
-  rdf_assert_triple(Dataset, rdfs:label, string(Title)),
+  assert_triple(B, Dataset, rdfs:label, string(Title)),
   rdf_prefix_iri(dist:DatasetLocal, Distribution),
-  rdf_assert_triple(Distribution, rdf:type, ldm:'Distribution'),
-  rdf_assert_triple(Dataset, ldm:distribution, Distribution),
-  maplist(assert_distribution(Distribution), ResourceDicts).
+  assert_instance(B, Distribution, ldm:'Distribution'),
+  assert_triple(B, Dataset, ldm:distribution, Distribution),
+  maplist(assert_distribution(B, Distribution), ResourceDicts).
 
-assert_distribution(Distribution, ResourceDict) :-
+assert_distribution(B, Distribution, ResourceDict) :-
   _{description: Description, id: Local, name: Name, url: Uri} :< ResourceDict,
   (   is_uri(Uri)
   ->  rdf_prefix_iri(file:Local, File),
-      rdf_assert_triple(Distribution, ldm:file, File),
-      rdf_assert_triple(File, ldm:downloadLocation, uri(Uri)),
+      assert_triple(B, Distribution, ldm:file, File),
+      assert_triple(B, File, ldm:downloadLocation, uri(Uri)),
       (   Description \== ''
-      ->  rdf_assert_triple(File, dcterm:description, string(Description))
+      ->  assert_triple(B, File, dct:description, string(Description))
       ;   true
       ),
-      rdf_assert_triple(File, dcterm:title, string(Name)),
-      rdf_assert_triple(File, rdfs:label, string(Name))
+      assert_triple(B, File, dct:title, string(Name)),
+      assert_triple(B, File, rdfs:label, string(Name))
   ;   true
   ).
 
-assert_organization(ImgDir, OrgDict) :-
+assert_organization(B, ImgDir, OrgDict) :-
   _{description: Description, image_url: ImageUri, name: Local, title: Name} :< OrgDict,
   rdf_prefix_iri(organization:Local, Org),
-  rdf_assert_triple(Org, rdf:type, foaf:'Org'),
+  assert_instance(B, Org, foaf:'Org'),
   (   Description \== ''
-  ->  rdf_assert_triple(Org, dcterm:description, string(Description))
+  ->  assert_triple(B, Org, dct:description, string(Description))
   ;   true
   ),
-  rdf_assert_triple(Org, dcterm:title, string(Name)),
-  assert_organization_image(ImgDir, Org, Local, ImageUri),
-  rdf_assert_triple(Org, rdfs:label, string(Name)).
+  assert_triple(B, Org, dct:title, string(Name)),
+  assert_organization_image(B, ImgDir, Org, Local, ImageUri),
+  assert_triple(B, Org, rdfs:label, string(Name)).
 
-assert_organization_image(ImgDir, Org, Local, Uri) :-
+assert_organization_image(B, ImgDir, Org, Local, Uri) :-
   directory_file_path(ImgDir, Local, Path),
   (   is_http_uri(Uri)
   ->  http_download(Uri, Path),
@@ -131,7 +132,7 @@ assert_organization_image(ImgDir, Org, Local, Uri) :-
           ->  update_image_file_name(Path, Extension),
               file_name_extension(Local, Extension, AssetName),
               asset_uri(_, _, index, AssetName, AssetUri),
-              rdf_assert_triple(Org, foaf:depiction, uri(AssetUri))
+              assert_triple(B, Org, foaf:depiction, uri(AssetUri))
           ;   print_message(warning, unrecognized_image_format(Format)),
               delete_file(Path)
           )

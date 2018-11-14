@@ -20,7 +20,7 @@ run :-
   Prefixes = [
     bnode,
     data-'https://index.lodlaundromat.org/dataset/',
-    dcterm,
+    dct,
     dist-'https://index.lodlaundromat.org/distribution/',
     foaf,
     graph-'https://data.lodlaundromat.org/wouter/index/graphs/',
@@ -31,4 +31,4 @@ run :-
     topic-'https://index.lodlaundromat.org/topic/',
     xsd
   ],
-  dataset_upload(_, User, index, _{files: DataFiles, prefixes: Prefixes}).
+  dataset_upload(ll, User, index, _{files: DataFiles, prefixes: Prefixes}).

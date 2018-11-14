@@ -1,8 +1,0 @@
-{
-  "dependencies": [
-    {"user": "wouterbeek", "repo": "CKAN-API"},
-    {"user": "wouterbeek", "repo": "prolog_magick"},
-    {"user": "wouterbeek", "repo": "Pro-RDF-DB"}
-  ],
-  "keywords": ["data cleaning","Linked Data","LOD Laundromat","Semantic Web"]
-}
